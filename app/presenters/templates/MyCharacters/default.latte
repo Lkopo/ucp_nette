@@ -1,0 +1,95 @@
+{block title}{_pages.my_characters.title}{/block}
+{block header}{_pages.my_characters.title}{/block}
+{block content}
+    <div class="col-md-12">
+        {if $characters->count() > 0}
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{_pages.my_characters.name}</th>
+                            <th>{_pages.my_characters.realm}</th>
+                            <th>{_pages.my_characters.race}</th>
+                            <th>{_pages.my_characters.class}</th>
+                            <th>{_pages.my_characters.level}</th>
+                            <th>{_pages.my_characters.golds}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr n:foreach="$characters as $character">
+                            <td>{$character->name|noescape|colorize_by_class:$character->class}{if $character->online == $characterRepository::STATUS_ONLINE}<span class="online_icon"></span>{/if}</td>
+                            <td>{$character->realm_id|realm_name}</td>
+                            <td>{$character->race|noescape|race_icon:$character->gender}</td>
+                            <td>{$character->class|noescape|class_icon}</td>
+                            <td>{$character->level}</td>
+                            <td><span class="golds">{$character->money|to_golds|number:0:'':','}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        {else}
+            <div class="alert alert-info" role="alert">{_pages.my_characters.no_characters}</div>
+        {/if}
+    </div>
+    <div n:if="$characters->count() > 0">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {_pages.my_characters.char_stats}
+                </div>
+                <div class="panel-body">
+                    <div class="col-lg-6">
+                        <div class="panel-body">
+                            <div id="morris-chars-chart"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="panel-body">
+                            <div id="morris-levels-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}
+{block scripts}
+    {include #parent}
+    {if $characters->count() > 0}
+        <script type="text/javascript">
+            $(function() {
+                Morris.Donut({
+                    element: 'morris-chars-chart',
+                    data: [
+                        {foreach $settingsManager->getRealms() as $realm}
+                        {
+                            label: {$realm->name} + " Realm",
+                            value: {$characterRepository->findByAccountAndRealm($user->id, $realm->id)->count()}
+                        },
+                        {/foreach}
+                    ],
+                    resize: true
+                });
+
+                Morris.Bar({
+                    element: 'morris-levels-chart',
+                    data: [
+                        {foreach $characters as $character}
+                        {
+                            y: {$character->name} + '-' + {$character->realm_id|realm_name},
+                            a: {$character->level}
+                        },
+                        {/foreach}
+                    ],
+                    xkey: 'y',
+                    ykeys: ['a'],
+                    labels: ['Level'],
+                    hideHover: 'auto',
+                    resize: true
+                });
+
+            });
+
+        </script>
+    {/if}
+{/block}

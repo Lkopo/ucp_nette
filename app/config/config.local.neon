@@ -1,0 +1,28 @@
+parameters:
+
+
+database:
+    web:
+        dsn: "mysql:host=127.0.0.1;dbname=ucp_web"
+        user: "root"
+        password: "pass"
+        debugger: true
+        explain: true
+        #options:
+        #    lazy: true
+    auth:
+        dsn: "mysql:host=127.0.0.1;dbname=auth"
+        user: "root"
+        password: "pass"
+        debugger: true
+        explain: true
+        options:
+            lazy: true
+    characters:
+        dsn: "mysql:host=127.0.0.1;dbname=wotlk_characters"
+        user: "root"
+        password: "pass"
+        debugger: true
+        explain: true
+        options:
+            lazy: true

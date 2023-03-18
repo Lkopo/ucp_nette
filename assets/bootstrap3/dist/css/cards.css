@@ -1,0 +1,105 @@
+/**
+ * Used snippet from: https://bootsnipp.com/snippets/xvodW
+ */
+.shape{
+    border-style: solid; border-width: 0 70px 40px 0; float:right; height: 0px; width: 0px;
+    -ms-transform:rotate(360deg); /* IE 9 */
+    -o-transform: rotate(360deg);  /* Opera 10.5 */
+    -webkit-transform:rotate(360deg); /* Safari and Chrome */
+    transform:rotate(360deg);
+}
+
+.shape-text{
+    color:#fff; font-size:12px; font-weight:bold; position:relative; right:-40px; top:2px; white-space: nowrap;
+    -ms-transform:rotate(30deg); /* IE 9 */
+    -o-transform: rotate(360deg);  /* Opera 10.5 */
+    -webkit-transform:rotate(30deg); /* Safari and Chrome */
+    transform:rotate(30deg);
+}
+
+.project {
+    min-height:200px;
+    height:auto;
+}
+
+.project{
+    background:#fff; border:1px solid #ddd; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); margin: 15px 0; overflow:hidden;
+}
+
+.project-radius{
+    border-radius:7px;
+}
+
+.project:hover, .project.active {
+    background: #F3F3F3;
+    /*cursor: pointer;*/
+}
+
+.project-default {    border-color: #999999; }
+.project-default .shape{
+    border-color: transparent #999999 transparent transparent;
+    border-color: rgba(255,255,255,0) #999999 rgba(255,255,255,0) rgba(255,255,255,0);
+}
+
+.project-danger {    border-color: #d9534f; }
+.project-danger .shape{
+    border-color: transparent #d9534f transparent transparent;
+    border-color: rgba(255,255,255,0) #d9534f rgba(255,255,255,0) rgba(255,255,255,0);
+}
+
+.project-success {	border-color: #5cb85c; background: #E0EEE0; }
+.project-success .shape{
+    border-color: transparent #5cb85c transparent transparent;
+    border-color: rgba(255,255,255,0) #5cb85c rgba(255,255,255,0) rgba(255,255,255,0);
+}
+.project-success:hover, .project-success.active {
+    background: #D1E5D1;
+}
+
+.project-primary {	border-color: #428bca; color: #0056A2; background: #E3EAF0; }
+.project-primary .shape{
+    border-color: transparent #428bca transparent transparent;
+    border-color: rgba(255,255,255,0) #428bca rgba(255,255,255,0) rgba(255,255,255,0);
+}
+
+.project-primary small {
+    color: #0056A2;
+}
+
+.project-primary:hover, .project-primary.active {
+    background: #D6E0E9;
+}
+
+.project-info {	border-color: #5bc0de; }
+.project-info .shape{
+    border-color: transparent #5bc0de transparent transparent;
+    border-color: rgba(255,255,255,0) #5bc0de rgba(255,255,255,0) rgba(255,255,255,0);
+}
+
+.project-warning {	border-color: #f0ad4e; }
+.project-warning .shape{
+    border-color: transparent #f0ad4e transparent transparent;
+    border-color: rgba(255,255,255,0) #f0ad4e rgba(255,255,255,0) rgba(255,255,255,0);
+}
+
+.project-content {
+    padding:0 20px 10px;
+}
+
+a.product-link {
+    color: #333 !important;
+    text-decoration: none !important;
+}
+
+a.product-link:hover {
+    text-decoration: none !important;
+}
+
+.top10 { margin-top:10px; }
+.top20 { margin-top:20px; }
+.top30 { margin-top:30px; }
+.top40 { margin-top:40px; }
+.top50 { margin-top:50px; }
+.top60 { margin-top:60px; }
+.top70 { margin-top:70px; }
+.top80 { margin-top:80px; }

@@ -1,0 +1,25 @@
+#ajax-spinner {
+    display: block;
+    position: fixed;
+    min-width: 160px;
+    height: 60px;
+    background: #E9E9E9;
+    border: 2px solid #DEDEDE; /* B9B9B9 */
+    padding: 13px;
+    text-align: left;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    font-size: 20px;
+    /*width: 32px;
+    height: 32px;*/
+    /* - use if you use bacground image, no ico */
+    /*background: url('../../../images/loading_icon.gif') no-repeat #ffffff;*/
+    /*z-index: 123456;*/
+    /*color: green;*/
+}
+
+#ajax-spinner img {
+    margin-left: 5px;
+    margin-right: 15px;
+}

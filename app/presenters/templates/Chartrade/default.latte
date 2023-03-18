@@ -1,0 +1,52 @@
+{block title}{_pages.chartrade.view_offers} - {_pages.chartrade.title}{/block}
+{block header}{_pages.chartrade.title}{/block}
+{block subheader}{_pages.chartrade.view_offers}{/block}
+{block content}
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="4">{_pages.chartrade.your_character}</th>
+                        <th>{_pages.my_characters.realm}</th>
+                        <th>{_pages.chartrade.status}</th>
+                        <th colspan="4">{_pages.chartrade.trade_with}</th>
+                        <th>{_pages.my_characters.realm}</th>
+                        <th>{_pages.chartrade.status}</th>
+                        <th>{_pages.global.actions}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr n:foreach="$trades as $trade">
+                        {var $offerer = $characterRepository->findOneById($trade->offerer_guid)}
+                        {var $requested = $characterRepository->findOneById($trade->requested_guid)}
+                        {if $offerer->account == $user->id}
+                            {var $my_character = $offerer}
+                            {var $dest_character = $requested}
+                        {else}
+                            {var $my_character = $requested}
+                            {var $dest_character = $offerer}
+                        {/if}
+                        <td>{$my_character->name|noescape|colorize_by_class:$my_character->class}</td>
+                        <td>{$my_character->race|noescape|race_icon:$my_character->gender} {$my_character->class|noescape|class_icon}</td>
+                        <td>{$my_character->level}</td>
+                        <td><span class="golds">{$my_character->money|to_golds|number:0:'':','}</span></td>
+                        <td n:class="$my_character->realm_id != $dest_character->realm_id ? cross-realm_txt">{$my_character->realm_id|realm_name}</td>
+                        <td>{$my_character->online|noescape|status}</td>
+
+                        <td>{$dest_character->name|noescape|colorize_by_class:$dest_character->class}</td>
+                        <td>{$dest_character->race|noescape|race_icon:$dest_character->gender} {$dest_character->class|noescape|class_icon}</td>
+                        <td>{$dest_character->level}</td>
+                        <td><span class="golds">{$dest_character->money|to_golds|number:0:'':','}</span></td>
+                        <td n:class="$my_character->realm_id != $dest_character->realm_id ? cross-realm_txt">{$dest_character->realm_id|realm_name}</td>
+                        <td>{$dest_character->online|noescape|status}</td>
+
+                        <td>
+                            <a class="tooltip-txt btn btn-circle btn-sm btn-success ajax" data-placement="top" n:href="accept! $trade->id" n:if="$user->id == $requested->account" {if $trade->verify_type != 0}title="{_messages.chartrade.not_verified}"  disabled="disabled"{else}title="{_pages.chartrade.accept}" {/if}><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+                            <a class="tooltip-txt btn btn-circle btn-sm btn-default ajax" data-placement="top" title="{_pages.chartrade.cancel}" n:href="cancel! $trade->id"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{/block}

@@ -1,0 +1,101 @@
+{block title}{_pages.accinfo.search.title}{/block}
+{block header}{_pages.accinfo.search.title}{/block}
+{block content}
+    <div class="col-md-12">
+        {var $banned_count = 0}
+        {var $muted_count = 0}
+        {if $accounts->count() > 0}
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>{_pages.accinfo.name}</th>
+                                <th>{_pages.my_account.email}</th>
+                                <th>{_pages.accinfo.created_date}</th>
+                                <th>{_pages.my_account.last_login}</th>
+                                <th>{_pages.my_account.last_logged_ip}</th>
+                                <th>{_pages.accinfo.status}</th>
+                                <th>{_pages.accinfo.state}</th>
+                                <th>{_pages.accinfo.mute}</th>
+                                <th>{_pages.accinfo.activation}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr n:foreach="$accounts as $account">
+                                <td><strong><a n:href="default email => null, ip => null, acc => $account->id" target="_blank">{$account->username} ({$account->id})</a></strong></td>
+                                <td>
+                                    {if $role->level >= $accountRepository::ROLE_ADMIN}
+                                        <a n:href="default acc => null, ip => null, email => $account->email" n:tag-if="$search_by != 'email'" target="_blank">{$account->email}</a>
+                                    {else}
+                                        {$account->email|censore_email}
+                                    {/if}
+                                </td>
+                                <td>{$account->joindate|date:'j.n.Y H:i:s'}</td>
+                                <td>
+                                    {if $account->last_login->getTimeStamp() > 0}
+                                        {$account->last_login|date:'j.n.Y <b>H:i:s</b>'|noescape}
+                                    {else}
+                                        {_pages.my_account.not_yet_logged}
+                                    {/if}
+                                </td>
+                                <td><a n:href="default acc => null, email => null, ip => $account->last_ip" n:tag-if="$search_by != 'ip'" target="_blank">{$account->last_ip}</a></td>
+                                <td>{$account->online|status|noescape}</td>
+                                <td>
+                                    {var $ban = $userManager->getBanInfo($account->id)}
+                                    {if !$ban}
+                                        <span class="status_online">{_pages.accinfo.not_banned}</span>
+                                    {else}
+                                        {php $banned_count++}
+                                        <span class="tooltip-txt status_offline" title="{_pages.my_account.banexpires}: {if $ban->bandate == $ban->unbandate}{_pages.my_account.ban_expires_never}{else}{($ban->unbandate-time())|time_to_text}{/if} | {_pages.my_account.banreason}: {$ban->banreason} | {_pages.my_account.bannedby}: {$ban->bannedby}">{_pages.accinfo.banned}</span>
+                                    {/if}
+                                </td>
+                                <td>
+                                    {if $account->mutetime == 0}
+                                        <span class="status_online">{_pages.accinfo.not_muted}</span>
+                                    {else}
+                                        {php $muted_count++}
+                                        <span class="tooltip-txt status_offline" title="{_pages.accinfo.mute_length}: {$account->mutetime|time_to_text:true} | {_pages.accinfo.mute_reason}: {$account->mutereason} | {_pages.accinfo.mute_by}: {$account->muteby}">{_pages.accinfo.muted}</span>
+                                    {/if}
+                                </td>
+                                <td>
+                                    {if $userManager->isActivated($account->id)}
+                                        <span class="status_online">{_pages.accinfo.activated}</span>
+                                    {else}
+                                        <span class="status_offline">{_pages.accinfo.not_activated}</span>
+                                    {/if}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+        {else}
+            <div class="alert alert-info" role="alert">{_pages.accinfo.no_accounts}</div>
+        {/if}
+    </div>
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                {_pages.accinfo.lookup_account}
+            </div>
+            <div class="panel-body">
+                <div class="col-md-6 offset">
+                    <div class="well well-lg">
+                        <h3>{_pages.accinfo.stats.total}: {$accounts->count()}</h3>
+                        <h3>{_pages.accinfo.stats.banned_users}: <span n:class="$banned_count > 0 ? status_offline : status_online">{$banned_count}</span></h3>
+                        <h3>{_pages.accinfo.stats.muted_users}: <span n:class="$muted_count > 0 ? status_offline : status_online">{$muted_count}</span></h3>
+                        <hr>
+                        <p>{_pages.accinfo.stats.description}</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    {control accinfoSearchForm}
+                    {control accSearchByEmailForm}
+                    {control accSearchByIpForm}
+                </div>
+            </div>
+            <div class="panel-footer">
+                {_pages.logs.dont_abuse}
+            </div>
+        </div>
+    </div>
+{/block}

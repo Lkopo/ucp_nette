@@ -1,0 +1,99 @@
+global:
+    something_wrong: "Ups. Něco nehezké se stalo. Kontaktuj administrátora."
+    warning: "Pozor!"
+    invalid_request: "Tvá požadavka je neplatná. Zkus to později."
+    confirm_delete: "Opravdu smazat?"
+    no_records: "Žádné záznamy nebyly nalezeny."
+    processing: "Zpracovávám..."
+### AUTH ###
+register:
+    activation_successful: "Tvůj účet byl úspěšně aktivován. Nyní se můžeš přihlásit."
+    activation_failed: "Aktivace účtu selhala. Zkontroluj si svou URL adresu, zda si zadal správně jako je v e-mailu."
+    successful_verify: "Registrace je téměř dokončena. Na tvůj e-mail byl odeslán ověřovací link."
+lostpass:
+    request_sent: "Tvá žádost o změnu hesla byla odeslána na tvou emailovou adresu."
+    request_failed: "Uživ. jméno s e-mailem se neshodují."
+    invalid_key: "Změna hesla selhala. Zkontroluj si svou URL adresu, zda si zadal správně jako je v e-mailu."
+    passchange_success: "Tvé heslo bylo úspěšně změněno. Nyní se s tímto heslem můžeš přihlásit."
+    passchange_failed: "Nastala chyba během změny tvého hesla. Zkus to později."
+### LOGGED IN ###
+global_character:
+    rename_successful: "Tvá požiadvka pro přejmenování postavy byla úspěšně zpracována. Při dalším přihlášení budeš vyzván přejmenovat si svoji postavu."
+    customize_successful: "Tvá požiadvka pro úpravu postavy byla úspěšně zpracována. Při dalším přihlášení budeš vyzván upravit si svoji postavu."
+    changerace_successful: "Tvá požiadvka pro změnu rasy byla úspěšně zpracována. Při dalším přihlášení budeš vyzván si změnit rasu na tvé postavě."
+user:
+    login_successful: "Byl si úspěšně přihlášen."
+    logout_successful: "Byl si úspěšně odhlášen."
+    login_to_continue: "Musíš být přihlášen, abys mohl prohlížet tuto stránku."
+    access_denied: "Přístup zamítnut."
+    not_activated: "Tvůj účet není ještě aktivován. Zkontroluj si svou e-mailovou adresu pro aktivační odkaz."
+    role_changed: "Byl si odhlášen kvůli změně tvých rolí."
+chartrade:
+    offer_premade: "Nabídka na výměnu byla vytvořena. Pro ověření tvé nabídky, zkontroluj si svou e-mailovou adresu, na kterou byl odeslán ověřovací link."
+    invalid_key: "Ověřovací klíč je nesprávný nebo již byl použit."
+    invalid_person: "Tento ověřovací klíč není přiřazen k tvému účtu."
+    verify_already_offer: "Nemůžeš ověřit nabídku, když už máš jednu aktivní."
+    premade_verified: "Tvá nabídka na výměnu byla ověřena. Ověřovací e-mail byl odeslán příjemci, aby mohl následně nabídku přijmout."
+    offer_verified: "Nabídka na výměnu je zcela ověřena. Nyní ji můžeš přijmout."
+    cancelled: "Nabídka na výměnu byla úspěšně zrušena."
+    accepted: "Výměna postav proběhla úspěšně."
+    cannot_accept_by_offerer: "Jen příjemce může přijmout nabídku."
+    not_verified: "Nejprve musíš ověřit tuto nabídku přes tvůj e-mail předtím, než ji můžeš přijmout."
+    someone_online: "Oba musíte být offline předtím, než přijmeš nabídku."
+my_account:
+    pc_request_already_sent: "Tvá požadavka na změnu hesla byla již odeslána na tvůj e-mail. Počkej alespoň 15 minut předtím, než odešleš další."
+    pc_request_sent: "Tvá požadavka na změnu hesla byla odeslána na tvůj e-mail. Zkontroluj si schránku pro pokračování."
+    lock_request_already_sent: "Tvá požadavka na uzamčení/odemknutí účet byla již odeslána na tvůj e-mail. Počkej alespoň 15 minut předtím, než odešleš další."
+    lock_request_sent: "Tvá požadavka na uzamčení/odemknutí účet byla odeslána na tvůj e-mail. Zkontroluj si schránku pro pokračování."
+    invalid_key: "Ověřovací klíč je nesprávný nebo již byl použit."
+    locked: "Tvůj účet byl úspěšně uzamčen."
+    unlocked: "Tvůj účet byl úspěšně odemčený."
+    passchange:
+        success: "Tvoje heslo bylo úspěšně změněno."
+        failed: "Nastala chyba během změny tvého hesla. Zkus to později."
+page_settings:
+    successfuly_changed: "Nastavení stránky byly úspěšně změněny."
+manage_users:
+    roled_user_notfound: "Účet pod tímto ID nemá přirazenou žádnou špeciální rolu."
+    user_notfound: "Účet pod tímto ID nebyl nalezen."
+    successfuly_added: "Role uživateli byla úspěšně přidána."
+    successfuly_changed: "Rola uživateli byla úspěšně změněna."
+    delete_yourself: "Nemůžeš vymazat role sobě samému."
+    delete_higher_role: "Nemůžeš vymazat role někomu, kdo má stejnou nebo vyšší roli než ty."
+    edit_higher_role: "Nemůžeš upravit rolu někomu, kto má stejnou nebo vyšší roli než ty."
+    edit_yourself: "Nemůžeš upravit svou vlastní rolu."
+    successfuly_deleted: "Úspěšně odstraněny."
+player_logs:
+    username_id_notfound: "Účet pod takovým uživ. jménem/ID nebyl nalezen."
+charinfo:
+    charname_id_notfound: "Postava s tímto jménem/GUID nebyla nalezena."
+service_settings:
+    successfuly_changed: "Nastavení služeb byly úspěšně změněny."
+accinfo:
+    username_id_notfound: "Účet pod takovým uživ. jménem/ID nebyl nalezen."
+    user_notfound: "Účet pod tímto ID nebyl nalezen."
+    confirm_deactivate: "Opravdu chceš deaktivovat tenhle účet? Uživatel si ho bude muset reaktivovat pomocí e-mailu."
+    successfuly_deactivated: "Účet byl úspěšne deaktivovanej."
+module_settings:
+    successfuly_changed: "Nastavení modulů byly úspěšně změněny."
+    module_disabled: "Tento modul je momentálně vypnutý. Zkus to později."
+vote:
+    invalid_confirmation: "Nejsi ve stavu hlasování pro tuto stránku. Prosím, udělej to pořádně nebo kontaktuj administrátora, pokud si myslíš, že děláš to správně."
+    success: "Vote Pointy byly úspěšně přičteny k tvému účtu."
+    failure: "Musíš hlasovat na této stránce, pokud chceš za ni vote Pointy."
+    already_voted: "Již jste hlasovali pro tuto stránku. Počkej, až bude hlasování znova dostupné."
+    internal_fail: "Během zpracování tvého hlasu došlo k chybě. Zkus to později."
+vote_sites:
+    site_notfound: "Stránka s takovým ID nebyla nalezena."
+    successfuly_added: "Hlasovací stránka byla úspěšně přidána."
+    successfuly_changed: "Hlasovací stránka byla úspěšně upravená."
+    successfuly_deleted: "Hlasovací stránka byla úspěšně odstraněna."
+donate:
+    product_notfound: "Produkt s takovým ID nebyl nalezen."
+    successfuly_purchased: "Deffender Coiny byly úspěšně přičteny k tvému účtu."
+    purchase_cancelled: "Tvůj nákup byl zrušen."
+donate_products:
+    product_notfound: "Produkt s takovým ID nebyl nalezen."
+    successfuly_added: "Produkt byl úspěšně přidán."
+    successfuly_changed: "Produkt byl úspěšně upraven."
+    successfuly_deleted: "Produkt byl úspěšně odstraněn."

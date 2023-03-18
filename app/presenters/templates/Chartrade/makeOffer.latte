@@ -1,0 +1,47 @@
+{block title}{_pages.chartrade.make_offer} - {_pages.chartrade.title}{/block}
+{block header}{_pages.chartrade.title}{/block}
+{block subheader}{_pages.chartrade.make_offer}{/block}
+{block content}
+    <div class="col-md-12">
+        <div class="alert alert-info" role="alert">
+            {_pages.chartrade.description}
+        </div>
+    </div>
+    <div class="col-md-6">
+        {snippet characterContainer}
+            {if $character}
+                <h3>{_pages.chartrade.your_character}:</h3>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <td>{$character->name|noescape|colorize_by_class:$character->class}</td>
+                            <td>{$character->realm_id|realm_name}</td>
+                            <td>{$character->race|noescape|race_icon:$character->gender}</td>
+                            <td>{$character->class|noescape|class_icon}</td>
+                            <td>{$character->level}</td>
+                            <td><span class="golds">{$character->money|to_golds|number:0:'':','}</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            {/if}
+        {/snippet}
+        {control makeOfferForm}
+    </div>
+{/block}
+{block scripts}
+    {include #parent}
+
+    <script type="text/javascript">
+        $('#' + {$control['makeOfferForm']['my_character']->htmlId}).off('change').on('change', function () {
+            $.nette.ajax({
+                type: 'GET',
+                url: {link selected!},
+                data: {
+                    'guid': $(this).val(),
+                }
+            });
+        });
+    </script>
+{/block}

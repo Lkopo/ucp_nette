@@ -1,0 +1,45 @@
+{block title}{_pages.chartrade.preview_offer} - {_pages.chartrade.title}{/block}
+{block header}{_pages.chartrade.title}{/block}
+{block subheader}{_pages.chartrade.preview_offer}{/block}
+{block content}
+    <div class="col-md-12">
+        <div class="alert alert-warning" n:if="$character->realm_id != $dest_character->realm_id" role="alert">
+            <strong>{_messages.global.warning}</strong> {_pages.chartrade.crossrealm_trade|noescape}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h3>{_pages.chartrade.made_offer_description}:</h3>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th colspan="6">{_pages.chartrade.your_character}:</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{$character->name|noescape|colorize_by_class:$character->class}</td>
+                    <td n:class="$character->realm_id != $dest_character->realm_id ? cross-realm_txt">{$character->realm_id|realm_name}</td>
+                    <td>{$character->race|noescape|race_icon:$character->gender}</td>
+                    <td>{$character->class|noescape|class_icon}</td>
+                    <td>{$character->level}</td>
+                    <td><span class="golds">{$character->money|to_golds|number:0:'':','}</span></td>
+                </tr>
+                <tr>
+                    <th colspan="6">{_pages.chartrade.trade_with}:</th>
+                </tr>
+                <tr>
+                    <td>{$dest_character->name|noescape|colorize_by_class:$dest_character->class}</td>
+                    <td n:class="$character->realm_id != $dest_character->realm_id ? cross-realm_txt">{$dest_character->realm_id|realm_name}</td>
+                    <td>{$dest_character->race|noescape|race_icon:$dest_character->gender}</td>
+                    <td>{$dest_character->class|noescape|class_icon}</td>
+                    <td>{$dest_character->level}</td>
+                    <td><span class="golds">{$dest_character->money|to_golds|number:0:'':','}</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        {control makeOfferConfirmForm}
+    </div>
+{/block}

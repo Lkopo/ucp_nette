@@ -1,0 +1,116 @@
+{block title}{_pages.donate.title}{/block}
+{block header}{_pages.donate.title}{/block}
+{block content}
+    <div class="col-md-12">
+        <div class="alert alert-info" role="alert">
+            {_pages.donate.my_points, $userDonatePoints|noescape}
+            {if $userManager->getGmLevel($user->id) == $userManager::VIP_PLVL}
+                {_pages.donate.vip_member|noescape}
+            {else}
+                {_pages.donate.not_vip|noescape}
+            {/if}
+        </div>
+        <div class="alert alert-info" role="alert">
+            {_pages.donate.donate_guide|noescape}
+        </div>
+        <hr>
+        <div id="checkout" n:if="$selected">
+            <h4>{_pages.donate.selected_item}:</h4>
+            <div class="row">
+                <div class="col-xs-3" n:if="$selected->id != 'vip'">
+                    <div class="project project-radius project-default text-center active{if $selected->bonus_coins > 0} project-success{/if}" data-product-id="{$selected->id}">
+                        <div class="project-content">
+                            <h3 class="lead">
+                                <strong>{$selected->price} &euro;</strong>
+                            </h3>
+                            <h3 class="lead">
+                                {_pages.global.donate_points}
+                                <br><strong>x{$selected->coins}</strong><strong style="color: green;" n:if="$selected->bonus_coins > 0">+{$selected->bonus_coins}</strong>
+                            </h3>
+                            <p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12" n:if="$selected->id == 'vip'">
+                    <div class="project project-radius project-primary text-center active">
+                        <div class="project-content">
+                            <h3 class="lead">
+                                <strong>{$selected->price} &euro;</strong>
+                                <br>
+                                <strong>{_pages.donate.vip_membership_item}</strong>
+                                <br>
+                                <small>{_pages.donate.vip_membership_slogan}</small>
+                            </h3>
+                            <div class="text-left">
+                                {_pages.donate.vip_membership_features|noescape}
+                            </div>
+                            <p>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 bottom-right">
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                        <input type="hidden" name="cmd" value="_donations">
+                        <input type="hidden" name="business" value="strauchradek@gmail.com">
+                        <input type="hidden" name="lc" value="CZ">
+                        <input type="hidden" name="item_name" value="{if $selected->id == 'vip'}{_pages.global.premium_vip|to_ascii}{else}{_pages.global.donate_points|to_ascii} x{$selected->coins+$selected->bonus_coins}{/if} | ACC: {$user->id|user_name} ({$user->id})">
+                        <input type="hidden" name="amount" value="{$selected->price|number:2:'.':''}">
+                        <input type="hidden" name="currency_code" value="EUR">
+                        <input type="hidden" name="no_note" value="0">
+                        <input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_LG.gif:NonHostedGuest">
+                        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" n:class="$selected->id != 'vip' ? top80" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <a n:href="default#products, product => null" class="btn btn-lg btn-default"><i class="fa fa-backward fa-fw"></i> Go back</a>
+        </div>
+
+        <div id="products" n:if="!$selected">
+            <div class="row">
+                <div class="col-xs-12">
+                    <a n:href="default#checkout, product => 'vip'" class="product-link">
+                    <div class="project project-radius project-primary text-center{ifCurrent default, product => 'vip'} active{/ifCurrent}">
+                        <div class="project-content">
+                            <h3 class="lead">
+                                <strong>{$donateManager::VIP_PRICE} &euro;</strong>
+                                <br>
+                                <strong>{_pages.donate.vip_membership_item}</strong>
+                                <br>
+                                <small>{_pages.donate.vip_membership_slogan}</small>
+                            </h3>
+                                <div class="text-left">
+                                    {_pages.donate.vip_membership_features|noescape}
+                                </div>
+                            <p>
+                            </p>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3" n:foreach="$products as $product">
+                    <a n:href="default#checkout, product => $product->id" class="product-link">
+                        <div class="project project-radius project-default text-center{ifCurrent default, product => $product->id} active{/ifCurrent}{if $product->bonus_coins > 0} project-success{/if}" data-product-id="{$product->id}">
+                            <div class="project-content">
+                                <h3 class="lead">
+                                    <strong>{$product->price} &euro;</strong>
+                                </h3>
+                                <h3 class="lead">
+                                    {_pages.global.donate_points}
+                                    <br><strong>x{$product->coins}</strong><strong style="color: green;" n:if="$product->bonus_coins > 0">+{$product->bonus_coins}</strong>
+                                </h3>
+                                <p>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}

@@ -1,0 +1,65 @@
+{block title}{_pages.chartrade_logs.title}{/block}
+{block header}{_pages.chartrade_logs.title}{/block}
+{block content}
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapseSearch">{_pages.chartrade_logs.search}</a>
+                </h4>
+            </div>
+            <div id="collapseSearch" n:class="panel-collapse, collapse, $param_acc || $param_char || $param_ip || $param_cancelled ? in">
+                <div class="panel-body">
+                    {control searchChartradeLogsForm}
+                </div>
+            </div>
+        </div>
+        {if $logs->count() > 0}
+            <div class="table-responsive">
+                <table class="table table-custom table-striped text-center">
+                    <thead>
+                    <tr>
+                        <th>{_pages.logs.time}</th>
+                        <th colspan="5">{_pages.player_logs.chartrade.offerer}</th>
+                        <th colspan="5">{_pages.player_logs.chartrade.requested}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr n:foreach="$logs as $log" n:class="$log->status == $chartradeRepository::STATUS_CANCELLED ? cancelled_trade">
+                        <td>{$log->closed_time|date:'j.n.Y <b>H:i:s</b>'|noescape}</td>
+
+                        <td class="tooltip-txt" title="GUID: {$log->offerer_guid}"><a n:href="Charinfo: char => $log->offerer_guid" class="not_decorated" target="_blank">{$log->offerer_name|noescape|colorize_by_class:$log->offerer_class}</a></td>
+                        <td><strong>{$log->offerer_account|user_name}</strong> [{$log->offerer_account}]</td>
+                        <td>{$log->offerer_ip}</td>
+                        <td n:class="$log->offerer_realm != $log->requested_realm ? cross-realm_txt">{$log->offerer_realm|realm_name}</td>
+                        <td><span class="golds">{$log->offerer_money|to_golds|number:0:'':','}</span></td>
+
+                        <td class="tooltip-txt" title="GUID: {$log->requested_guid}"><a n:href="Charinfo: char => $log->requested_guid" target="_blank">{$log->requested_name|noescape|colorize_by_class:$log->requested_class}</a></td>
+                        <td><strong>{$log->requested_account|user_name}</strong> [{$log->requested_account}]</td>
+                        <td>{$log->requested_ip}</td>
+                        <td n:class="$log->offerer_realm != $log->requested_realm ? cross-realm_txt">{$log->requested_realm|realm_name}</td>
+                        <td><span class="golds">{$log->requested_money|to_golds|number:0:'':','}</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center">
+                <div class="btn-group" role="group" aria-label="{_pages.paginator.name}">
+                    <div class="btn btn-default disabled" role="group" n:tag-if="$paginator->isFirst()"><a class="btn btn-default tooltip-txt" role="group" n:href="this, page => $paginator->getPage() - 1" n:tag-if="!$paginator->isFirst()" data-placement="top" title="{_pages.paginator.previous}"><i class="fa fa-angle-double-left"></i></a></div>
+                    {for $scatter = 5,
+                     $i = ($paginator->getPage() - (($paginator->getPage() <= $scatter) ?
+                                                                $paginator->getPage()-1 : $scatter)),
+                     $x = $paginator->getPage() + ((($paginator->getPage() + $scatter) < $paginator->getLastPage()) ?
+                                                                $scatter : ($paginator->getLastPage()-$paginator->getPage()));
+                     $i <= $x;
+                     $i++}
+                    <div class="btn btn-default disabled" role="group" n:tag-if="$i == $paginator->getPage()">
+                        <a class="btn btn-default" role="group" n:href="this, page => $i" n:tag-if="$i !== $paginator->getPage()">{$i}</a></div>{/for}
+                    <div class="btn btn-default disabled" role="group" n:tag-if="$paginator->isLast()"><a class="btn btn-default tooltip-txt" role="group" n:href="this, page => $paginator->getPage() + 1" n:tag-if="!$paginator->isLast()" data-placement="top" title="{_pages.paginator.next}"><i class="fa fa-angle-double-right"></i></a></div>
+                </div>
+            </div>
+        {else}
+            <div class="alert alert-info" role="alert">{_messages.global.no_records}</div>
+        {/if}
+    </div>
+{/block}

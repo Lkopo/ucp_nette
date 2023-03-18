@@ -1,0 +1,99 @@
+global:
+    something_wrong: "Oops. Something wrong happened. Contact administrator."
+    warning: "Warning!"
+    invalid_request: "Your request is invalid. Try again later."
+    confirm_delete: "Really delete?"
+    no_records: "No records found."
+    processing: "Processing..."
+### AUTH ###
+register:
+    activation_successful: "Your account was activated successfuly. Now you can log in."
+    activation_failed: "Activation failed. Check if your URL address is the same as in your e-mail message."
+    successful_verify: "Registration is almost complete. An e-mail was sent to your e-mail address to verify."
+lostpass:
+    request_sent: "Your request for password change was sent to your e-mail address."
+    request_failed: "Username and e-mail address do not match."
+    invalid_key: "Password change failed. Check if your URL address is the same as in your e-mail message."
+    passchange_success: "Your password has been successfuly changed. Now you can sign in with new password."
+    passchange_failed: "There was an error during your password change. Try again later."
+### LOGGED IN ###
+global_character:
+    rename_successful: "Your request for character rename was submitted successfuly. You will be prompted to rename your character at next login."
+    customize_successful: "Your request for character customize was submitted successfuly. You will be prompted to customize your character at next login."
+    changerace_successful: "Your request for race change was submitted successfuly. You will be prompted to change race for your character at next login."
+user:
+    login_successful: "You were successfuly logged in."
+    logout_successful: "You were successfuly logged out."
+    login_to_continue: "You must be logged in to view this page."
+    access_denied: "Access denied."
+    not_activated: "Your account is not activated yet. Check your e-mail address for activation link."
+    role_changed: "You were logged out due to change of your roles."
+chartrade:
+    offer_premade: "An offer was created. To verify your offer, check your e-mail address for verification link."
+    invalid_key: "Verification key is invalid or was already used."
+    invalid_person: "This verification key is not assigned to your account."
+    verify_already_offer: "You cannot verify another trade offer if you have an active one."
+    premade_verified: "Your trade offer was verified. A verification e-mail was sent to requested player to confirm."
+    offer_verified: "A chartrade offer is fully verified. Now you can accept it."
+    cancelled: "A trade was successfuly cancelled."
+    accepted: "Characters were traded successfuly."
+    cannot_accept_by_offerer: "Only requested player can accept a trade offer."
+    not_verified: "You need to verify this trade offer via your e-mail address before accepting it."
+    someone_online: "Both of you need to be offline before accepting an offer."
+my_account:
+    pc_request_already_sent: "Your password change request was already sent to your e-mail address. Please wait at least 15 minutes before sending another one."
+    pc_request_sent: "Your password change request was sent to your e-mail address. Check your e-mail to continue."
+    lock_request_already_sent: "Your request for account lock/unlock was already sent to your e-mail address. Please wait at least 15 minutes before sending another one."
+    lock_request_sent: "Your request for account lock/unlock was sent to your e-mail address. Check your e-mail to continue."
+    invalid_key: "Invalid verification key or it was already used."
+    locked: "Your account was successfuly locked."
+    unlocked: "Your account was successfuly unlocked."
+    passchange:
+        success: "Your password has been successfuly changed."
+        failed: "There was an error during your password change. Try again later."
+page_settings:
+    successfuly_changed: "Page settings changed successfuly."
+manage_users:
+    roled_user_notfound: "Account with that ID does not have any special role assigned."
+    user_notfound: "Account with that ID was not found."
+    successfuly_added: "Sucessfuly added role added to the user."
+    successfuly_changed: "Role of the user was successfuly changed."
+    delete_yourself: "You cannot remove roles from yourself."
+    delete_higher_role: "You cannot remove roles from someone who has equal or higher role than you."
+    edit_higher_role: "You cannot edit role of someone who has equal or higher role than you."
+    edit_yourself: "You cannot edit your own roles."
+    successfuly_deleted: "Deleted successfuly."
+player_logs:
+    username_id_notfound: "Account with that username/ID was not found."
+charinfo:
+    charname_id_notfound: "Character with that name/GUID was not found."
+service_settings:
+    successfuly_changed: "Service settings changed successfuly."
+accinfo:
+    username_id_notfound: "Account with that username/ID was not found."
+    user_notfound: "Account with that ID was not found."
+    confirm_deactivate: "Do you really want to deactivate this account? User will have to re-active it via email."
+    successfuly_deactivated: "Account was successfuly deactivated."
+module_settings:
+    successfuly_changed: "Module settings changed successfuly."
+    module_disabled: "This module is currently disabled. Try it again later."
+vote:
+    invalid_confirmation: "You are not in voting state for that site. Please do it in proper way, or contact administrator if you think you are doing it right."
+    success: "Vote Points were successfuly added to your account."
+    failure: "You have to vote on that site in case you want to get the Vote Points for it."
+    already_voted: "You have already voted for that site. Wait till it will be available again to you."
+    internal_fail: "There was an error during your vote process. Please try again later."
+vote_sites:
+    site_notfound: "Site with that ID was not found."
+    successfuly_added: "Vote site was successfuly added."
+    successfuly_changed: "Vote site was successfuly updated."
+    successfuly_deleted: "Vote site was successfuly removed."
+donate:
+    product_notfound: "Product with that ID was not found."
+    successfuly_purchased: "Deffender Coins were successfuly added to your account."
+    purchase_cancelled: "Your purchase was cancelled."
+donate_products:
+    product_notfound: "Product with that ID was not found."
+    successfuly_added: "Product was successfuly added."
+    successfuly_changed: "Product was successfuly updated."
+    successfuly_deleted: "Product was successfuly removed."

@@ -1,0 +1,334 @@
+global:
+    actions: "Actions"
+    t_months: "mnths"
+    t_weeks: "weeks"
+    t_days_s: "d"
+    t_hours_s: "h"
+    t_mins_s: "m"
+    t_secs_s: "s"
+    banned_alert: "Your account is banned. Some features will be unable for you."
+    trade_offers: "{0} No trade offers|{1} One trade offer|]1, Inf[ %count% trade offers"
+    admin_tools: "Admin tools"
+    logged_as: "Logged as"
+    ap_flush: "Distribution"
+    ap_flush_description: "Arena Points distribution time"
+    ap_remaining: "Remaining"
+    close: "Close"
+    sign_out: "Logout"
+    service_tolled: "This service has a toll"
+    for: "for"
+    vote_points: "Vote points"
+    donate_points: "Deffender Coins"
+    premium_vip: "Premium VIP Membership"
+paginator:
+    name: "Paginator"
+    previous: "Previous"
+    next: "Next"
+### AUTH ###
+login:
+    title: "Sign In"
+    description: "Use your credentials to sign in into User Control Panel."
+register:
+    title: "Register a new account"
+    description: "Enter your real e-mail address. After a successful registration a verification e-mail will be sent."
+lostpass:
+    title: "Lost password"
+    description: "If you do not remember your login password, enter your username and e-mail address here. A request e-mail will be sent."
+    confirm:
+        title: "Enter and confirm your new password"
+        description: "Your password change is almost done. Enter and confirm your new password below."
+### LOGGED IN ###
+dashboard:
+    title: "Dashboard"
+    last_logins: "Last %count% successful logins"
+    last_login_fails: "Last %count% failed login attempts"
+    welcome_msg: "Welcome to the"
+    my_account_link: "See full info about your account here"
+my_characters:
+    title: "My characters"
+    no_characters: "Your account does not have any characters created yet. Go in-game to create some."
+    name: "Name"
+    realm: "Realm"
+    level: "Level"
+    account: "Account"
+    race: "Race"
+    class: "Class"
+    golds: "Golds"
+    char_stats: "Character statistics"
+    rename: "Rename character"
+    customize: "Customize character"
+    changerace: "Race change"
+chartrade:
+    title: "Character trade"
+    description: "Chartrade allows you to trade characters with other players. Just select your character and enter character name you want to trade with."
+    your_character: "Your character"
+    trade_with: "Trade with"
+    made_offer_description: "Your trade offer is ready"
+    crossrealm_trade: "This will be a <strong>cross-realm</strong> trade. Realm of your character does not match with realm of character you are going to trade with!"
+    view_offers: "View offers"
+    make_offer: "Make offer"
+    preview_offer: "Preview offer"
+    accept: "Accept offer"
+    cancel: "Cancel offer"
+    status: "Status"
+my_account:
+    title: "My account"
+    details: "Account info"
+    account: "Account"
+    email: "E-mail"
+    last_login: "Last login"
+    last_logged_ip: "Last logged IP"
+    not_yet_logged: "Not logged in yet"
+    current_ip: "Current IP"
+    role: "Role"
+    account_notbanned: "Account is not banned."
+    account_banned: "Account is banned."
+    ip_notbanned: "IP address is not banned."
+    ip_banned: "IP address is banned."
+    banreason: "Reason"
+    bannedby: "Banned by"
+    banexpires: "Expires in"
+    ban_permanent: "Permanent"
+    ban_expires_never: "Never"
+    locked: "Locked"
+    unlocked: "Unlocked"
+    passchange:
+        title: "Change password"
+        description: "Your password change is almost done. Enter and confirm your new password below."
+    vip_status: "VIP status"
+    active_vip: "You are an active VIP member"
+    not_vip: "You are not a VIP member"
+page_settings:
+    title: "Page settings"
+manage_users:
+    title: "Manage users"
+    delete_user: "Remove all special roles for that user."
+    delete_higher_role: "User has equal or higher role than you."
+    no_users: "No privileged users found."
+    id: "ID"
+    username: "Username"
+    role: "Role"
+    level: "Level"
+    action: "Action"
+    plvl: "Plvl"
+    its_you: "It's you"
+    add:
+        title: "Add role to the new user"
+    edit:
+        title: "Edit user's role"
+logs:
+    account: "Account"
+    ip: "IP"
+    time: "Time"
+    type: "Type"
+    types:
+        1: "Login"
+        2: "Logout"
+        3: "Failed login attempt"
+        4: "Registration"
+        5: "Lost password request"
+        6: "Changed password (lost password)"
+        7: "Change password request"
+        8: "Changed password (logged user)"
+        9: "Account lock"
+        10: "Account unlock"
+        11: "Character rename"
+        12: "Character customize"
+        13: "Character race change"
+        14: "Character migration"
+        15: "Created trade offer"
+        16: "Verified trade offer by offerer"
+        17: "Verified trade offer by requested"
+        18: "Accepted trade offer"
+        19: "Cancelled trade offer"
+        20: "Voted on a site"
+        21: "Purchase of Deffender Coins (Donate)"
+    comment: "Comment"
+    view_trade: "Show trade offer"
+    trade_preview: "Trade preview"
+    trade_status:
+        title: "Trade status"
+        active: "Active"
+        accepted: "Accepted"
+        cancelled: "Cancelled"
+    dont_abuse: "Don't abuse your privileges."
+my_logs:
+    title: "My logs"
+    filter: "Filter records..."
+player_logs:
+    title: "Player logs"
+    search: "Search in logs..."
+    for_account: "For account"
+    chartrade:
+        offerer: "Offerer"
+        requested: "Requested"
+chartrade_logs:
+    title: "Chartrade logs"
+    search: "Search in logs..."
+charinfo:
+    title: "Character info"
+    class_and_race: "Class & race"
+    account: "Account"
+    last_logout: "Last logout"
+    kills: "Kills"
+    honors: "Honors"
+    arena_points: "Arena Points"
+    played: "Played"
+    status: "Status"
+    lookup_character: "Lookup a character"
+service_settings:
+    title: "Service settings"
+accinfo:
+    title: "Account info"
+    lookup_account: "Lookup an account"
+    name: "Name"
+    created_date: "Created"
+    lock_status: "Lock status"
+    status: "Status"
+    state: "State"
+    not_banned: "Not banned"
+    banned: "Banned"
+    mute: "Mute"
+    not_muted: "Not muted"
+    muted: "Muted"
+    activation: "Activation"
+    activated: "Activated"
+    not_activated: "Not activated"
+    deactivate: "Deactivate"
+    mute_length: "Length"
+    mute_reason: "Reason"
+    mute_by: "Muted by"
+    characters: "Characters"
+    no_characters: "No characters found."
+    ban_history: "Ban history"
+    view_bans: "Show ban history"
+    ban_time: "Banned at"
+    ban_length: "Length"
+    no_bans: "No bans found."
+    no_accounts: "No accounts found for the search criteria."
+    stats:
+        banned_users: "Banned accounts"
+        muted_users: "Muted accounts"
+        total: "Total records"
+        description: "Click on account name if you want to see full information about that account. Clicking on e-mail/IP address will show you a list of accounts matching your search criteria."
+    search:
+        title: "Search list"
+    view_donates: "Show donate history"
+    donate_history: "Donate history"
+    donate_time: "Date & time"
+    donate_paid: "Paid"
+    vip_status: "VIP status"
+    active_vip: "Active VIP member"
+    not_vip: "Not a VIP member"
+module_settings:
+    title: "Module settings"
+vote:
+    title: "Vote for a server"
+    my_points: "{0} You <strong>do not</strong> have currently any Vote Points.|{1} You have currently <strong>1</strong> Vote Point.|]1, Inf[ You have currently <strong>%count%</strong> Vote Points."
+    description: """
+    <strong>How to vote:</strong>
+                              <ol>
+                                  <li>Choose the site you want to vote on and click the <code>Vote</code> button.</li>
+                                  <li>A vote site will be opened in a new window.</li>
+                                  <li>Make a vote for our server.</li>
+                                  <li>
+                                      Go back to the UCP and click the <code>Add me Vote Points</code> button.
+                                      <ul>
+                                          <li>You can click the <code>Open site</code> button to if you need to open voting site again.</li>
+                                      </ul>
+                                  </li>
+                                  <li>If you proceeded correctly as instructed, the Vote Points will be added to your account and successful message will appear.</li>
+                              </ol>
+                 """
+    site_name: "Site name"
+    points: "Points"
+    action: "Action"
+    add_votepoints: "Add me Vote Points"
+    open_site: "Open site"
+    next_vote: "Next vote available in"
+    make_vote: "Vote"
+vote_sites:
+    title: "Vote sites management"
+    site_name: "Site name"
+    image: "Image"
+    url: "URL to vote"
+    points: "Points"
+    cooldown: "Next vote cooldown"
+    action: "Action"
+    no_image: "No image"
+    no_sites: "No vote sites found."
+    edit_site: "Edit"
+    delete_site: "Delete"
+    add:
+        title: "Add a new site"
+    edit:
+        title: "Edit a site"
+donate:
+    title: "Donate"
+    my_points: "{0} You <strong>do not</strong> have currently any Deffender Coins.|{1} You have currently <strong>1</strong> Deffender Coin.|]1, Inf[ You have currently <strong>%count%</strong> Deffender Coins."
+    buy_paypal: "Buy via PayPal"
+    selected_item: "You have selected an item"
+    vip_membership_item: "Premium VIP Membership"
+    vip_membership_slogan: "...once a premium, always a premium..."
+    vip_membership_features: """
+    <ul>
+        <li>access to all <strong>Deffender teleporter</strong> options,</li>
+        <li>all flight paths unlocked (command <strong>.flightpath</strong>),</li>
+        <li>premium gift pack to character of your choosing  (<strong>Companion pet</strong>, <strong>Mount</strong>, <strong>Tabard of the Defender</strong>, <strong>5x transmog tokens</strong>),</li>
+        <li>being skipped when deleting inactive characters.</li>
+    </ul>
+    """
+    vip_member: "You are <strong>an active</strong> VIP member."
+    not_vip: "You <strong>are not</strong> a VIP member."
+    donate_guide: """
+                <h4>Donation Guide</h4>
+                <p>Dear players, if you are satisfied with our service and would like to help us financially,
+                    use the option of voluntary donation for server maintenance, which isn't cheap. Voluntary
+                    donations are your option to get our virtual currency <strong>Deffender Coin</strong>,
+                    that will allow you to buy many great things to upgrade your characters ingame.</p>
+                <p>Donations help maintain, improve and expand server and its services. Financial support to
+                    the server is voluntary and irreversible and the only rewards you will get for it are those
+                    offered by our server. Choose donation amount so that it doesn't cause you existential crysis.</p>
+                <p>All donations are well registered and none of private data about you is available for third parties,
+                    the exception might be in case of investigating a crime by czech police. All voluntarily donated
+                    funds are going to be used only for services related to Deffender.eu project.</p>
+                <p>We thank everyone who decided to support us, we greatly appreciate your donations.</p>
+                <p>If you have any questions related to financial donations aim them to main administrator to e-mail:
+                    <a href="mailto:donate.deffender.eu@gmail.com">donate.deffender.eu@gmail.com</a>.</p>
+                <hr>
+                <h4>Premium VIP Membership</h4>
+                <p>You can also get a <strong>permanent</strong> premium membership using one-time donation of
+                    <strong>10.00 &euro;</strong>. The premium membership gives you all the features listed below.</p>
+                <hr>
+                <h4>Donation Methods</h4>
+                <p>Currently we support only donations through PayPal services.
+                    If you have any questions related to donation methods aim them to main administrator to e-mail:
+                    <a href="mailto:donate.deffender.eu@gmail.com">donate.deffender.eu@gmail.com</a>.</p>
+                <p>Sent payments without account information (in note or message for recipient) are considered as
+                    anonymous donations, which are voluntary and irreversible without any reward.</p>
+                <p><strong>Donations via PayPal</strong>:</p>
+                    <ul>
+                        <li>click on the item you want as donation reward to your account,</li>
+                        <li>your selected item will be displayed with button <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
+                            alt="PayPal - The safer, easier way to pay online!">, that will redirect you to the PayPal page with pre-created data, so you
+                            do not need fill anything, just submit your donation.</li>
+                    </ul>
+                <hr>
+                <p><strong>Deffender Coin</strong> is a official name for our virtual currency, which is obtainable only via donations.</p>
+    """
+donate_stats:
+    title: "Donate Stats"
+donate_products:
+    title: "Donate products management"
+    price: "Price"
+    bonus_points: "Bonus DC"
+    action: "Action"
+    edit_product: "Edit"
+    delete_product: "Delete"
+    add:
+        title: "Add a new product"
+    edit:
+        title: "Edit a product"
+
+
+

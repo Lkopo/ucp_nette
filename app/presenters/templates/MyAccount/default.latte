@@ -1,0 +1,128 @@
+{block title}{_pages.my_account.title}{/block}
+{block header}{_pages.my_account.title}{/block}
+{block content}
+    <div class="col-md-12">
+        <fieldset>
+            <legend>{_pages.my_account.details}</legend>
+            <div class="table-responsive">
+                <table class="table table-custom">
+                    <tbody>
+                        <tr>
+                            <td>{_pages.my_account.account}:</td>
+                            <td><strong>{$user->identity->username}</strong></td>
+                            <td>
+                                {if $isUserBanned}
+                                    {var $ban = $userManager->getBanInfo($user->id)}
+                                    <span style="color: red;">{_pages.my_account.account_banned}
+                                        <br>
+                                        [ {_pages.my_account.banreason}: <strong>{$ban->banreason}</strong> | {_pages.my_account.bannedby}: <strong>{$ban->bannedby}</strong> | {_pages.my_account.banexpires}:<strong>
+                                            {if $ban->bandate == $ban->unbandate}
+                                                {_pages.my_account.ban_expires_never}
+                                            {else}
+                                                {($ban->unbandate-time())|time_to_text}
+                                            {/if}
+                                        </strong>
+                                        ]
+                                    </span>
+                                {else}
+                                    <span style="color: green;">{_pages.my_account.account_notbanned}</span>
+                                {/if}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.my_account.email}:</td>
+                            <td colspan="2">
+                                <strong>
+                                    {if $role->level >= $accountRepository::ROLE_ADMIN}
+                                        {$user->identity->email}
+                                    {else}
+                                        {$user->identity->email|censore_email}
+                                    {/if}
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.my_account.role}:</td>
+                            <td colspan="2"><span class="role-label label label-primary">{$user->identity->roles[0]|role_name}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.my_account.last_logged_ip}:</td>
+                            <td>
+                                <strong>{$user->identity->last_ip}</strong>
+                                &nbsp;
+                                <a n:href="lockUnlockRequest!" class="ajax btn btn-sm btn-primary">{if $user->identity->locked == $userManager::STATUS_LOCKED}<i class="fa fa-unlock fa-fw"></i> {_forms.my_account.unlock_account}{else}<i class="fa fa-lock fa-fw"></i> {_forms.my_account.lock_account}{/if}</a>
+                            </td>
+                            <td>
+                                {if $userManager->hasIPBan($user->identity->last_ip)}
+                                    {var $ban = $userManager->getIPBanInfo($user->identity->last_ip)}
+                                    <span style="color: red;">{_pages.my_account.ip_banned}
+                                        <br>
+                                        [ {_pages.my_account.banreason}: <strong>{$ban->banreason}</strong> | {_pages.my_account.bannedby}: <strong>{$ban->bannedby}</strong> | {_pages.my_account.banexpires}:
+                                        <strong>
+                                            {if $ban->bandate == $ban->unbandate}
+                                                {_pages.my_account.ban_permanent}
+                                            {else}
+                                                {($ban->unbandate-time())|time_to_text}]
+                                            {/if}
+                                        </strong>
+                                        ]
+                                    </span>
+                                {else}
+                                    <span style="color: green;">{_pages.my_account.ip_notbanned}</span>
+                                {/if}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.my_account.last_login}:</td>
+                            <td colspan="2">
+                                <strong>
+                                    {if $user->identity->last_login->getTimeStamp() > 0}
+                                        {$user->identity->last_login|date:'j.n.Y H:i:s'}
+                                    {else}
+                                        {_pages.my_account.not_yet_logged}
+                                    {/if}
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.my_account.current_ip}:</td>
+                            <td><strong>{$current_ip}</strong></td>
+                            <td>
+                                {if $userManager->hasIPBan($current_ip)}
+                                    {var $ban = $userManager->getIPBanInfo($current_ip)}
+                                    <span style="color: red;">{_pages.my_account.ip_banned}
+                                        <br>
+                                        [{_pages.my_account.banreason}: <strong>{$ban->banreason}</strong> | {_pages.my_account.bannedby}: <strong>{$ban->bannedby}</strong> | {_pages.my_account.banexpires}: <strong>{($ban->unbandate-time())|time_to_text}]</strong></span>
+                                {else}
+                                    <span style="color: green;">{_pages.my_account.ip_notbanned}</span>
+                                {/if}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.global.vote_points}:</td>
+                            <td colspan="2">
+                                <strong>{$userVotePoints}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.global.donate_points}:</td>
+                            <td colspan="2">
+                                <strong>{$userDonatePoints}</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.my_account.vip_status}:</td>
+                            <td colspan="2">
+                                <strong>{if $userManager->getGmLevel($user->id) == $userManager::VIP_PLVL}{_pages.my_account.active_vip}{else}{_pages.my_account.not_vip}{/if}</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>{_pages.my_account.passchange.title}</legend>
+            <a n:href="passwordRequest!" class="ajax btn btn-lg btn-primary btn-block">{_forms.my_account.passchange.submit}</a>
+        </fieldset>
+    </div>
+{/block}

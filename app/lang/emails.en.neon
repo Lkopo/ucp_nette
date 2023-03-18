@@ -1,0 +1,114 @@
+register:
+    subject: "Account activation"
+    body: """
+    Hello,
+
+    thank you for your registration at %site_name%. The last step is needed to activate your account %acc_name% - verify your registration via link below:
+
+    %act_link%
+
+    If this e-mail is a mistake, ignore it.
+
+    ------
+    %site_email_sign%
+    """
+lostpass:
+    subject: "Lost password confirmation"
+    body: """
+    Hello,
+
+    to confirm your request for password change for account %acc_name% at %site_name% use the link below:
+
+    %confirm_link%
+
+    If this e-mail is a mistake, ignore it.
+
+    ------
+    %site_email_sign%
+    """
+passchange:
+    subject: "Password change request"
+    body: """
+    Hello,
+
+    there was a request to your account %acc_name% at %site_name% to change your password. If you want to change your password, use the link below:
+
+    %confirm_link%
+
+    If this e-mail is a mistake, check your account logs to make sure this account was not performed by illegitimate person.
+
+    ------
+    %site_email_sign%
+    """
+chartrade:
+    offerer:
+        subject: "Verify your chartrade offer"
+        body: """
+        Hello,
+
+        to verify your chartrade offer created on account %acc_name% at %site_name% (your character: %offerer_name%, requested character: %requested_name%) use the link below:
+
+        %confirm_link%
+
+        If this e-mail is a mistake, check your account logs to make sure this account was not performed by illegitimate person.
+
+        ------
+        %site_email_sign%
+        """
+    requested:
+        subject: "An chartrade offer was made for your character"
+        body: """
+        Hello,
+
+        an chartrade offer for character %requested_name% was made by %offerer_name%. To accept this offer, you must verify it using link below:
+
+        %confirm_link%
+
+        If this e-mail is a mistake, ignore it.
+
+        ------
+        %site_email_sign%
+        """
+lockunlock:
+    lock:
+        subject: "Account lock request"
+        body: """
+        Hello,
+
+        there was a request to lock your account %acc_name% at %site_name% on your last logged IP address. If you want to perform this action, use the link below to authenticate yourself:
+
+        %confirm_link%
+
+        If this e-mail is a mistake, check your account logs to make sure this account was not performed by illegitimate person.
+
+        ------
+        %site_email_sign%
+        """
+    unlock:
+        subject: "Account unlock request"
+        body: """
+        Hello,
+
+        there was a request to unlock your locked account %acc_name% at %site_name% on your last logged IP address. If you want to perform this action, use the link below to authenticate yourself:
+
+        %confirm_link%
+
+        If this e-mail is a mistake, check your account logs to make sure this account was not performed by illegitimate person.
+
+        ------
+        %site_email_sign%
+        """
+deactivate:
+    subject: "Account re-activation"
+    body: """
+    Hello,
+
+    your account %acc_name% at %site_name% was deactivated by administrator. To re-activate your account, use the link below:
+
+    %act_link%
+
+    If this e-mail is a mistake, ignore it.
+
+    ------
+    %site_email_sign%
+    """

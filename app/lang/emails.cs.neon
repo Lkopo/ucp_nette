@@ -1,0 +1,114 @@
+register:
+    subject: "Aktivace účtu"
+    body: """
+    Ahoj,
+
+    děkujeme Ti za registraci na portálu %site_name%. Posledním krokem je aktivace Tvého účtu %acc_name%, který ověříš pomocí odkazu níže:
+
+    %act_link%
+
+    Ak je tenle e-mail nedorozumění, ignoruj ho.
+
+    ------
+    %site_email_sign%
+    """
+lostpass:
+    subject: "Potvrzení ztraceného hesla"
+    body: """
+    Ahoj,
+
+    pro potvrzení žádosti o změnu hesla pro účet %acc_name% na portálu %site_name% klikni na odkaz níže:
+
+    %confirm_link%
+
+    Ak je tenle e-mail nedorozumění, ignoruj ho.
+
+    ------
+    %site_email_sign%
+    """
+passchange:
+    subject: "Žádost na změnu hesla"
+    body: """
+    Ahoj,
+
+    byla vytvořená žádost na Tvůj účet %acc_name% na portálu %site_name% na změnu Tvého hesla. Ak si přeješ skutečně zmeniť heslo, klikni na odkaz níže:
+
+    %confirm_link%
+
+    Ak je tenle e-mail nedorozumění, zkontroluj si své záznamy činností, aby sis byl jistý, že nikdo neoprávněný nemá k Tvému účtu přístup.
+
+    ------
+    %site_email_sign%
+    """
+chartrade:
+    offerer:
+        subject: "Ověření Tvé nabídky na výměnu"
+        body: """
+        Ahoj,
+
+        pro ověření Tvé nabídky na výměnu postav z účtu %acc_name% na portálu %site_name% (tvá postava: %offerer_name%, vyžádaná postava: %requested_name%) klikni na odkaz níže:
+
+        %confirm_link%
+
+        Ak je tenle e-mail nedorozumění, zkontroluj si své záznamy činností, aby sis byl jistý, že nikdo neoprávněný nemá k Tvému účtu přístup.
+
+        ------
+        %site_email_sign%
+        """
+    requested:
+        subject: "Bola vytvorená ponuka na výmenu postavy za Tvoju postavu"
+        body: """
+        Ahoj,
+
+        byla vytvořena nabídka na záměnu postav za Tvou postavu %requested_name% postavou %offerer_name%. Pro přijetí této nabídky ji musíš nejprve ověřit kliknutím na odkaz níže:
+
+        %confirm_link%
+
+        Ak je tenle e-mail nedorozumění, ignoruj ho.
+
+        ------
+        %site_email_sign%
+        """
+lockunlock:
+    lock:
+        subject: "Žádost o uzamčení účtu"
+        body: """
+        Ahoj,
+
+        byla vytvořena žádost o uzamčení Tvého účtu %acc_name% na portálu %site_name% na Tvou poslední přihlášenou IP adresu. Pokud chceš tuto akci provést, klikni na odkaz níže:
+
+        %confirm_link%
+
+        Ak je tenle e-mail nedorozumění, zkontroluj si své záznamy činností, aby sis byl jistý, že nikdo neoprávněný nemá k Tvému účtu přístup.
+
+        ------
+        %site_email_sign%
+        """
+    unlock:
+        subject: "Žiadosť o odomknutie účtu"
+        body: """
+        Ahoj,
+
+        byla vytvořena žádost o odemčení Tvého uzamčeného účtu %acc_name% na portálu %site_name% na Tvou poslední přihlášenou IP adresu. Pokud chceš tuto akci provést, klikni na odkaz níže:
+
+        %confirm_link%
+
+        Ak je tenle e-mail nedorozumění, zkontroluj si své záznamy činností, aby sis byl jistý, že nikdo neoprávněný nemá k Tvému účtu přístup.
+
+        ------
+        %site_email_sign%
+        """
+deactivate:
+    subject: "Reaktivace účtu"
+    body: """
+    Ahoj,
+
+    Tvůj účet %acc_name% na portálu %site_name% byl deaktivovaný administrátorem. Pokud si ho chceš reaktivovat, klikni na odkaz níže:
+
+    %act_link%
+
+    Ak je tenle e-mail nedorozumění, ignoruj ho.
+
+    ------
+    %site_email_sign%
+    """

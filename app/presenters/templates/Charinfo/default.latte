@@ -1,0 +1,75 @@
+{block title}{_pages.charinfo.title}{/block}
+{block header}{_pages.charinfo.title}{/block}
+{block content}
+    {if $character}
+        <div class="col-md-6">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>{_pages.my_characters.name}:</td>
+                            <td>{$character->name|noescape|colorize_by_class:$character->class} <strong>({$character->guid})</strong></td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.my_characters.realm}:</td>
+                            <td><strong>{$character->realm_id|realm_name}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.charinfo.class_and_race}:</td>
+                            <td>{$character->class|noescape|class_icon} {$character->race|noescape|race_icon:$character->gender}</td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.my_characters.level}:</td>
+                            <td><strong>{$character->level}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.my_characters.account}:</td>
+                            <td><strong><a n:href="Accinfo: acc => $character->account" target="_blank">{$character->account|user_name} ({$character->account})</a></strong></td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.my_characters.golds}:</td>
+                            <td><span class="golds">{$character->money|to_golds|number:0:'':','}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.charinfo.kills}:</td>
+                            <td><strong>{$character->totalKills}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.charinfo.honors}:</td>
+                            <td><strong>{$character->totalHonorPoints|number:0:'':','}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.charinfo.arena_points}:</td>
+                            <td><strong>{$character->arenaPoints|number:0:'':','}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.charinfo.last_logout}:</td>
+                            <td><strong>{$character->logout_time|date:'j.n.Y H:i:s'}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.charinfo.played}:</td>
+                            <td><strong>{$character->totaltime|time_to_text:true}</strong></td>
+                        </tr>
+                        <tr>
+                            <td>{_pages.charinfo.status}:</td>
+                            <td><strong>{$character->online|noescape|status}</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {/if}
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                {_pages.charinfo.lookup_character}
+            </div>
+            <div class="panel-body">
+                {control charinfoSearchForm}
+            </div>
+            <div class="panel-footer">
+                {_pages.logs.dont_abuse}
+            </div>
+        </div>
+    </div>
+{/block}

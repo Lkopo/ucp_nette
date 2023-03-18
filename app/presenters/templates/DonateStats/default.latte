@@ -1,0 +1,111 @@
+{block title}{_pages.donate_stats.title}{/block}
+{block header}{_pages.donate_stats.title}{/block}
+{block content}
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Top 10 Donators
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <tr>
+                                    <th>&#35</th>
+                                    <th>Account</th>
+                                    <th>Total Paid</th>
+                                    <th>Total Coins</th>
+                                </tr>
+                                <tr n:foreach="$top10donators as $donator">
+                                    <td>{$iterator->counter}</td>
+                                    <td><strong><a n:href="Accinfo: acc => $donator->account_id" target="_blank">{$donator->account_id|user_name}</a></strong></td>
+                                    <td>{$donator->total_paid} &euro;</td>
+                                    <td>{$donator->total_points} DC</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Distribution Statistics
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                                <tr>
+                                    <th>Total &euro; received</th>
+                                    <th>Total DC distributed</th>
+                                </tr>
+                                <tr>
+                                    <td>{$distributionStats->total_paid} &euro;</td>
+                                    <td>{$distributionStats->total_points} DC</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Last 12 Months Payment Statistics
+                    </div>
+                    <div class="panel-body">
+                        <div id="morris-yearstats-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Separate Payment Statistics
+                    </div>
+                    <div class="panel-body">
+                        <div id="morris-allpaid-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}
+{block scripts}
+    {include #parent}
+    <script type="text/javascript">
+        $(function() {
+            Morris.Donut({
+                element: 'morris-allpaid-chart',
+                data: [
+                    {foreach $paidStats as $stat}
+                    {
+                        label: {$stat->paid} + ' €',
+                        value: {$stat->count}
+                    },
+                    {/foreach}
+                ],
+                formatter: function (y) { return y + "x" },
+                resize: true
+            });
+
+            Morris.Area({
+                element: 'morris-yearstats-chart',
+                data: [
+                    {foreach $yearPaidStats as $stat}
+                        { period: {$stat->year} + '-' + {$stat->month}, paid: {$stat->total_paid} },
+                    {/foreach}
+                ],
+                postUnits: ' €',
+                xkey: 'period',
+                ykeys: ['paid'],
+                labels: ['Total Paid'],
+                pointSize: 2,
+                hideHover: 'auto'
+            });
+        });
+        </script>
+{/block}

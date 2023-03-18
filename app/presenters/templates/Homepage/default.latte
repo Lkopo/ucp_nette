@@ -1,0 +1,67 @@
+{block title}{_pages.dashboard.title}{/block}
+{block header}{_pages.dashboard.title}{/block}
+{block content}
+		<div class="col-md-12">
+            <div class="alert-info alert" role="alert">{_pages.dashboard.welcome_msg} {$settings->page_description}. <strong><a n:href="MyAccount:">{_pages.dashboard.my_account_link}</a></strong>.</div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    {_pages.dashboard.last_logins, 10}
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    {if $login_logs->count() > 0}
+                        <div class="table-responsive">
+                            <table class="table table-custom table-striped text-center">
+                                <thead>
+                                    <tr>
+                                        <th>{_pages.logs.ip}</th>
+                                        <th>{_pages.logs.time}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr n:foreach="$login_logs as $login_log">
+                                        <td>{$login_log->ip}</td>
+                                        <td>{$login_log->time|date:'j.n.Y <b>H:i:s</b>'|noescape}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    {else}
+                        <h3>{_messages.global.no_records}</h3>
+                    {/if}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    {_pages.dashboard.last_login_fails, 10}
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    {if $login_fails->count() > 0}
+                        <div class="table-responsive">
+                            <table class="table table-custom table-striped text-center">
+                                <thead>
+                                <tr>
+                                    <th>{_pages.logs.ip}</th>
+                                    <th>{_pages.logs.time}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr n:foreach="$login_fails as $login_fail">
+                                    <td>{$login_fail->ip}</td>
+                                    <td>{$login_fail->time|date:'j.n.Y <b>H:i:s</b>'|noescape}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    {else}
+                        <h3>{_messages.global.no_records}</h3>
+                    {/if}
+                </div>
+            </div>
+        </div>
+{/block}

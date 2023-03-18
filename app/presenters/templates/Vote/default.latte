@@ -1,0 +1,64 @@
+{block title}{_pages.vote.title}{/block}
+{block header}{_pages.vote.title}{/block}
+{block content}
+    <div class="col-md-12" id="vote_sites_panel">
+        <div class="alert alert-info" role="alert">
+            {_pages.vote.my_points, $userVotePoints|noescape}
+        </div>
+        <div class="alert alert-info" role="alert">
+            {_pages.vote.description|noescape}
+        </div>
+        {snippet siteList}
+            {if $sites->count() > 0}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="col-md-6">{_pages.vote.site_name}</th>
+                                <th class="col-md-1">{_pages.vote.points}</th>
+                                <th class="col-md-5">{_pages.vote.action}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr n:foreach="$sites as $site">
+                                <td class="col-md-6"><img src="{$basePath}/assets/images/vote_sites/{$site->image_path}" n:tag-if="$site->image_path" alt="$site->name" width="{$site->image_width}px" height="{$site->image_height}px" border="0"> <span class="vote_site_name">{$site->name}</span></td>
+                                <td class="col-md-1">+{$site->points}</td>
+                                <td class="col-md-5">
+                                    {var $user_vote = $voteManager->findOneUserVoteByUserIdAndSiteId($user->id, $site->id)}
+                                    {if $user_vote && $user_vote->state == $voteManager::STATE_VOTING}
+                                        <a n:href="confirmed! $site->id" class="ajax btn btn-primary"><i class="fa fa-plus"></i> {_pages.vote.add_votepoints}</a> <a href="{$site->url}" class="btn btn-default" data-site-id="{$site->id}" target="_blank">{_pages.vote.open_site}</a>
+                                    {else}
+                                        {if $user_vote && $user_vote->state == $voteManager::STATE_VOTED && $user_vote->time+($site->cooldown*$voteManager::VOTE_MULTIPLY_HOURS) > time()}
+                                            <button class="btn btn-default" disabled>{_pages.vote.next_vote}
+                                                <span class="next_vote_countdown">{$user_vote->time+($site->cooldown*$voteManager::VOTE_MULTIPLY_HOURS)|date:'m/d/Y H:i:s'}</span>
+                                            </button>
+                                        {else}
+                                            <a href="{$site->url}" id="site-{$site->id}" class="vote_btn btn btn-default" data-site-id="{$site->id}" target="_blank">{_pages.vote.make_vote}</a>
+                                        {/if}
+                                    {/if}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            {else}
+                <div class="alert alert-info" role="alert">{_pages.vote_sites.no_sites}</div>
+            {/if}
+        {/snippet}
+    </div>
+{/block}
+{block scripts}
+    {include #parent}
+
+    <script type="text/javascript">
+        $('#vote_sites_panel').on('click', '.vote_btn', function () {
+            $.nette.ajax({
+                type: 'GET',
+                url: {link clicked!},
+                data: {
+                    'site_id': $(this).data('site-id'),
+                }
+            })
+        });
+    </script>
+{/block}

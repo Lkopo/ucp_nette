@@ -1,0 +1,46 @@
+{block title}{_pages.manage_users.title}{/block}
+{block header}{_pages.manage_users.title}{/block}
+{block content}
+    <div class="col-md-12">
+        <div class="text-right">
+            <a n:href="ManageUsers:add" class="btn btn-success"><i class="fa fa-plus-circle"></i> {_pages.manage_users.add.title}</a>
+        </div>
+        {snippet roledUsersList}
+            {if $roled_users->count() > 0}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>{_pages.manage_users.id}</th>
+                            <th>{_pages.manage_users.username}</th>
+                            <th>{_pages.manage_users.plvl}</th>
+                            <th>{_pages.manage_users.role}</th>
+                            <th>{_pages.manage_users.level}</th>
+                            <th>{_pages.manage_users.action}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr n:foreach="$roled_users as $roled_user_role">
+                            <td>{$roled_user_role->user_id}</td>
+                            <td><strong><a n:href="Accinfo: acc => $roled_user_role->user_id" target="_blank">{$roled_user_role->user_id|user_name}</a></strong></td>
+                            <td>{$userManager->getGmLevel($roled_user_role->user_id)}</td>
+                            <td><span class="role-label label label-primary">{$roled_user_role->role_id|role_name}</span></td>
+                            <td>{$roled_user_role->role_id|role_level}</td>
+                            <td>
+                                {if $roled_user_role->user_id != $user->id}
+                                    <a n:href="edit $roled_user_role->user_id" class="tooltip-txt btn btn-circle btn-sm btn-primary" data-placement="top" title="{_pages.manage_users.edit.title}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                                    <span class="tooltip-txt btn btn-circle btn-sm btn-default" data-placement="top" title="{_pages.manage_users.delete_higher_role}" disabled="disabled" n:tag-if="$roleCache->getLevel($roled_user_role->role_id) >= $roleCache->getLevel($user->roles[0])"><a class="tooltip-txt btn btn-circle btn-sm btn-default ajax" data-placement="top" title="{_pages.manage_users.delete_user}" n:href="delete! $roled_user_role->user_id" data-confirm="{_messages.global.confirm_delete}" n:tag-if="$roleCache->getLevel($roled_user_role->role_id) < $roleCache->getLevel($user->roles[0])"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a></span>
+                                {else}
+                                    {_pages.manage_users.its_you}
+                                {/if}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            {else}
+                <div class="alert alert-info" role="alert">{_pages.manage_users.no_users}</div>
+            {/if}
+        {/snippet}
+    </div>
+{/block}

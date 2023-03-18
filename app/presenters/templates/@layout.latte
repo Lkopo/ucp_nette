@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="{$settings->page_description}">
+    <meta name="keywords" content="{$settings->page_keywords}">
+	<meta name="author" content="Eduard 'Lkopo' Karpiel">
+
+	<title>{block title}{/block} - {$settings->page_name}</title>
+
+    {block styles}
+	<!-- Bootstrap Core CSS -->
+	<link href="{$basePath}/assets/bootstrap3/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- MetisMenu CSS -->
+	<link href="{$basePath}/assets/bootstrap3/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+	<!-- Timeline CSS -->
+	<link href="{$basePath}/assets/bootstrap3/dist/css/timeline.css" rel="stylesheet">
+
+	<!-- Custom CSS -->
+	<link href="{$basePath}/assets/bootstrap3/dist/css/sb-admin-2.css" rel="stylesheet">
+
+	<!-- Morris Charts CSS -->
+	<link href="{$basePath}/assets/bootstrap3/bower_components/morrisjs/morris.css" rel="stylesheet">
+
+	<!-- Custom Fonts -->
+	<link href="{$basePath}/assets/bootstrap3/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Toggle Plugin -->
+    <link href="{$basePath}/assets/bootstrap3/bower_components/bootstrap-toggle/css/bootstrap-toggle.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Spinner -->
+    <link href="{$basePath}/assets/bootstrap3/dist/css/spinner.css" rel="stylesheet">
+
+    <!-- Cards -->
+    <link href="{$basePath}/assets/bootstrap3/dist/css/cards.css" rel="stylesheet">
+
+    {/block}
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0">
+        {var $languages = array('en' => 'English', 'cs' => 'Čeština', 'sk' => 'Slovenčina')}
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" n:href="Homepage:">{$settings->page_name}</a>
+		</div>
+		<!-- /.navbar-header -->
+
+		<ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-language fa-fw"></i>{$languages[$locale]}  <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    {foreach $languages as $key => $value}
+                        {continueIf $key == $locale}
+                        <li><a n:href="this locale => $key"><i class="fa fa-language fa-fw"></i> {$value}</a></li>
+                    {/foreach}
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+            <li>{_pages.global.logged_as}:</li>
+			<li class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <strong>{$user->identity->username}</strong> <i class="fa fa-caret-down"></i>
+				</a>
+				<ul class="dropdown-menu dropdown-user">
+                    {if $user->id != $accountRepository::SAFEMODE_ADMIN_ID}
+                        <li><a n:href="MyAccount:"><i class="fa fa-user fa-fw"></i> {_pages.my_account.title}</a>
+                        </li>
+                        <li class="divider"></li>
+                    {/if}
+					<li><a n:href="Auth:logout"><i class="fa fa-sign-out fa-fw"></i> {_pages.global.sign_out}</a>
+					</li>
+				</ul>
+				<!-- /.dropdown-user -->
+			</li>
+			<!-- /.dropdown -->
+		</ul>
+		<!-- /.navbar-top-links -->
+
+		<div class="navbar-default sidebar" role="navigation">
+			<div class="sidebar-nav navbar-collapse">
+				<ul class="nav" id="side-menu">
+					<li class="sidebar-search">
+                        {if $user->id != $accountRepository::SAFEMODE_ADMIN_ID}
+                            <div class="tooltip-txt" data-placement="top" title="{_pages.global.ap_flush_description}">
+                                {_pages.global.ap_flush}: <strong id="flush-datetime">{$characterRepository->getNextArenaPointDistributionTime()|date:'m/d/Y H:i:s'}</strong>
+                                <br>
+                                {_pages.global.ap_remaining}: <strong id="flush-countdown"></strong>
+                            </div>
+                        {/if}
+					</li>
+                    <li>
+                        <a n:href="Homepage:"><i class="fa fa-dashboard fa-fw"></i> {_pages.dashboard.title}</a>
+                    </li>
+                    {if $user->id != $accountRepository::SAFEMODE_ADMIN_ID}
+                        <li>
+                            <a n:href="MyCharacters:"><i class="fa fa-table fa-fw"></i> {_pages.my_characters.title}</a>
+                        </li>
+                        <li n:if="($moduleSettings->getStatus($settingsManager::MODULE_RENAME) == $settingsManager::MODULE_STATUS_ENABLED)">
+                            <a n:href="MyCharacters:rename"><i class="fa fa-edit fa-fw"></i> {_pages.my_characters.rename}</a>
+                        </li>
+                        <li n:if="($moduleSettings->getStatus($settingsManager::MODULE_CUSTOMIZE) == $settingsManager::MODULE_STATUS_ENABLED)">
+                            <a n:href="MyCharacters:customize"><i class="fa fa-edit fa-fw"></i> {_pages.my_characters.customize}</a>
+                        </li>
+                        <li n:if="($moduleSettings->getStatus($settingsManager::MODULE_CHANGERACE) == $settingsManager::MODULE_STATUS_ENABLED)">
+                            <a n:href="MyCharacters:changeRace"><i class="fa fa-edit fa-fw"></i> {_pages.my_characters.changerace}</a>
+                        </li>
+                        <li n:if="!($role->level > $accountRepository::ROLE_PLAYER || $isUserBanned || $moduleSettings->getStatus($settingsManager::MODULE_CHARTRADE) == $settingsManager::MODULE_STATUS_DISABLED)">
+                            <a n:href="Chartrade:"><i class="fa fa-exchange fa-fw"></i> {_pages.chartrade.title}{if $countOffers > 0} <span class="label label-success" title="{_pages.global.trade_offers, $countOffers}">{$countOffers}{/if}</span></a>
+                        </li>
+                        <li n:if="($moduleSettings->getStatus($settingsManager::MODULE_VOTE) == $settingsManager::MODULE_STATUS_ENABLED)">
+                            <a n:href="Vote:"><i class="fa fa-thumbs-o-up fa-fw"></i> {_pages.vote.title}</a>
+                        </li>
+                        <li n:if="($moduleSettings->getStatus($settingsManager::MODULE_DONATE) == $settingsManager::MODULE_STATUS_ENABLED)">
+                            <a n:href="Donate:, product => null"><i class="fa fa-paypal fa-fw"></i> {_pages.donate.title}</a>
+                        </li>
+                        <li>
+                            <a n:href="MyLogs: ip => null, type => null"><i class="fa fa-list fa-fw"></i> {_pages.my_logs.title}</a>
+                        </li>
+                    {/if}
+                    {if $role->level > $accountRepository::ROLE_PLAYER}
+                        <li>
+                            <h4>{_pages.global.admin_tools}</h4>
+                        </li>
+                        {if $user->id != $accountRepository::SAFEMODE_ADMIN_ID}
+                            <li>
+                                <a n:href="Accinfo: acc => null, email => null, ip => null"><i class="fa fa-info fa-fw"></i> {_pages.accinfo.title}</a>
+                            </li>
+                            <li>
+                                <a n:href="Charinfo: char => null"><i class="fa fa-info fa-fw"></i> {_pages.charinfo.title}</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li n:if="($role->level >= $accountRepository::ROLE_GM_ZD)">
+                                <a n:href="PlayerLogs: acc => null, ip => null, type => null"><i class="fa fa-list fa-fw"></i> {_pages.player_logs.title}</a>
+                            </li>
+                            <li n:if="($role->level >= $accountRepository::ROLE_GM_ZD && $moduleSettings->getStatus($settingsManager::MODULE_CHARTRADE) != $settingsManager::MODULE_STATUS_DISABLED)">
+                                <a n:href="ChartradeLogs: acc => null, char => null, ip => null, cancelled => null"><i class="fa fa-list fa-fw"></i> {_pages.chartrade_logs.title}</a>
+                            </li>
+                            <li n:if="($role->level >= $accountRepository::ROLE_HEM)">
+                                <a n:href="ManageUsers:"><i class="fa fa-users fa-fw"></i> {_pages.manage_users.title}</a>
+                            </li>
+                        {/if}
+                        <li n:if="($role->level >= $accountRepository::ROLE_ADMIN && $moduleSettings->getStatus($settingsManager::MODULE_VOTE) == $settingsManager::MODULE_STATUS_ENABLED)">
+                            <a n:href="VoteSites:"><i class="fa fa-globe fa-fw"></i> {_pages.vote_sites.title}</a>
+                        </li>
+                        <li n:if="($role->level >= $accountRepository::ROLE_WEBMASTER && $moduleSettings->getStatus($settingsManager::MODULE_DONATE) == $settingsManager::MODULE_STATUS_ENABLED)">
+                            <a n:href="DonateProducts:"><i class="fa fa-paypal fa-fw"></i> {_pages.donate_products.title}</a>
+                        </li>
+                        <li n:if="($role->level >= $accountRepository::ROLE_ADMIN)">
+                            <a n:href="ServiceSettings:"><i class="fa fa-gear fa-fw"></i> {_pages.service_settings.title}</a>
+                        </li>
+                        <li n:if="($role->level >= $accountRepository::ROLE_ADMIN)">
+                            <a n:href="ModuleSettings:"><i class="fa fa-gear fa-fw"></i> {_pages.module_settings.title}</a>
+                        </li>
+                        <li n:if="($role->level == $accountRepository::ROLE_WEBMASTER)">
+                            <a n:href="PageSettings:"><i class="fa fa-gear fa-fw"></i> {_pages.page_settings.title}</a>
+                        </li>
+                    {/if}
+				</ul>
+			</div>
+			<!-- /.sidebar-collapse -->
+		</div>
+		<!-- /.navbar-static-side -->
+	</nav>
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">{include header}{ifset #subheader} <small>{include subheader}</small>{/ifset}</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger" role="alert" n:if="$isUserBanned">{_pages.global.banned_alert}</div>
+				{snippet flashes}
+                    <div n:foreach="$flashes as $flash" class="alert alert-{$flash->type} alert-dismissable" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {_$flash->message}
+                    </div>
+                {/snippet}
+            </div>
+            {include content}
+			<div class="col-md-12">
+                <p style="margin: 40px 0"></p>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+</div>
+{block scripts}
+    <!-- jQuery -->
+    <script src="{$basePath}/assets/bootstrap3/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{$basePath}/assets/bootstrap3/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="{$basePath}/assets/bootstrap3/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <script src="{$basePath}/assets/bootstrap3/bower_components/jquery.countdown/dist/jquery.countdown.js"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="{$basePath}/assets/bootstrap3/bower_components/raphael/raphael-min.js"></script>
+    <script src="{$basePath}/assets/bootstrap3/bower_components/morrisjs/morris.min.js"></script>
+
+    <!-- Bootstrap Toggle Plugin -->
+    <script src="{$basePath}/assets/bootstrap3/bower_components/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{$basePath}/assets/bootstrap3/dist/js/sb-admin-2.js"></script>
+    <script src="{$basePath}/assets/js/nette.ajax.js"></script>
+
+    <script src="{$basePath}/assets/js/netteForms.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $.nette.init();
+        });
+
+        $.nette.ext({
+            before: function (xhr, settings) {
+                if (!settings.nette) {
+                    return;
+                }
+
+                var question = settings.nette.el.data('confirm');
+                
+                if (question) {
+                    return confirm(question);
+                }
+
+                var el = settings.nette.el;
+
+                if(el.is('[disabled]'))
+                    return false;
+            },
+            start: function (xhr, settings) {
+                if(!settings.nette)
+                    return;
+
+                $('.ajax').each(function () {
+                    $(this).attr('disabled', true);
+                })
+            },
+            complete: function (xhr, status, settings) {
+                deleteTooltips();
+
+                if (!settings.nette) {
+                    return;
+                }
+
+                $('.ajax').each(function () {
+                    if($(this).is('[disabled]'))
+                        $(this).attr('disabled', false);
+                })
+            }
+        });
+
+        $.nette.ext('spinner', {
+            init: function (x) {
+                this.spinner = this.createSpinner();
+                this.spinner.appendTo('body');
+            },
+            start: function (jqXHR, settings) {
+                this.spinner.css({
+                    left: '50%',
+                    top: '30%'
+                });
+                this.spinner.show(this.speed);
+            },
+            complete: function () {
+                this.spinner.hide(this.speed);
+            }
+        }, {
+            createSpinner: function () {
+                var spinner = $('<div>', {
+                    id: 'ajax-spinner',
+                    css: {
+                        display: 'none'
+                    }
+                });
+
+                var basePath = {$basePath};
+                var processingTxt = {_messages.global.processing}
+
+                spinner.append("<img src='" + basePath + "/assets/images/loading_icon.gif' width='25' height='25' alt='" + processingTxt + "' border='0' />");
+
+                spinner.append(processingTxt);
+                // -- delete if you use bacgroun image, no ico
+                return spinner;
+            },
+            spinner: null,
+            speed: undefined
+        });
+
+        $.nette.ext('snippets').after(function ($el) {
+            if ($el.is('#snippet--siteList')) {
+                refreshCountdowns();
+            }
+        });
+
+        $('.tooltip-txt').tooltip({
+            container: "body"
+        });
+
+        function deleteTooltips() {
+            $('div[role="tooltip"]').each(function () {
+                $(this).remove();
+            });
+
+            $('.tooltip-txt').tooltip({
+                container: "body"
+            })
+        };
+
+        function refreshCountdowns() {
+            var dateElements = $(".next_vote_countdown");
+
+            dateElements.each(function () {
+                if($(this).length) {
+                    var date = new Date($(this).text());
+
+                    $(this).text(("0" + date.getDate()).slice(-2) + "." + ("0" + (date.getMonth()+1)).slice(-2) + "." + date.getFullYear() + " " + ("0" + date.getHours()).slice(-2) + ":" + ("0" + date.getMinutes()).slice(-2) + ":" + ("0" + date.getSeconds()).slice(-2));
+
+                    $(this).countdown(date, function(event) {
+                        if(event.elapsed) {
+                            location.reload();
+                        }
+
+                        if(event.strftime('%D') > 0)
+                            $(this).html(event.strftime('%Dd %Hh %Mm %Ss'));
+                        else
+                            $(this).html(event.strftime('%Hh %Mm %Ss'));
+                    });
+                }
+            });
+        }
+    </script>
+{/block}
+</body>
+</html>

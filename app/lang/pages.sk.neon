@@ -1,0 +1,335 @@
+global:
+    actions: "Akcie"
+    t_months: "mes"
+    t_weeks: "týžd"
+    t_days_s: "d"
+    t_hours_s: "h"
+    t_mins_s: "m"
+    t_secs_s: "s"
+    banned_alert: "Tvoj účet je zabanovaný. Niektoré funkcie v UCP ti nebudú prístupné."
+    trade_offers: "{0} Žiadna ponuka na výmenu|{1} Jedna ponuka na výmenu|]1,4] %count% ponuky na výmenu|]4, Inf[ %count% ponúk na výmenu"
+    admin_tools: "Nástroje pre adminov"
+    logged_as: "Prihlásený ako"
+    ap_flush: "Prepočet"
+    ap_flush_description: "Čas prepočtu Arena Pointov"
+    ap_remaining: "Zostáva"
+    close: "Zatvoriť"
+    sign_out: "Odhlásiť sa"
+    service_tolled: "Táto služba je spoplatnená"
+    for: "pre"
+    vote_points: "Vote pointy"
+    donate_points: "Deffender Coiny"
+    premium_vip: "Premium VIP členstvo"
+paginator:
+    name: "Stránkovač"
+    previous: "Predchádzajúca"
+    next: "Nasledujúca"
+### AUTH ###
+login:
+    title: "Prihlásiť sa"
+    description: "Použi svoje prihlasovacie údaje na prihlásenie sa do User Control Panelu."
+register:
+    title: "Zaregistrovať nový účet"
+    description: "Vlož svoju skutočnú e-mailovú adresu. Po úspešnej registrácii ti bude odoslaný verifikačný e-mail."
+lostpass:
+    title: "Stratené heslo"
+    description: "Ak si nepamätáš svoje prihlasovacie heslo, zadaj svoje používateľské meno a e-mail. Následne ti bude odoslaný e-mail s požiadavkou na zmenu hesla."
+    confirm:
+        title: "Zadaj a potvrď tvoje nové heslo"
+        description: "Zmena tvojho hesla je takmer hotová. Nižšie zadaj a potvrď tvoje nové heslo."
+### LOGGED IN ###
+dashboard:
+    title: "Nástenka"
+    last_logins: "Posledných %count% úspešných prihlásení"
+    last_login_fails: "Posledných %count% neúspešných pokusov na prihlásenie sa"
+    welcome_msg: "Vitajte v"
+    my_account_link: "Pozri úplné info o tvojom účte tu"
+my_characters:
+    title: "Moje postavy"
+    no_characters: "Tvoj účet nemá momentálne žiadnu vytvorenú postavu. Choď do hry, ak si chceš nejakú vytvoriť."
+    name: "Meno"
+    realm: "Realm"
+    level: "Level"
+    account: "Účet"
+    race: "Rasa"
+    class: "Class"
+    golds: "Goldy"
+    char_stats: "Štatistiky postáv"
+    rename: "Premenovať postavu"
+    customize: "Upraviť postavu"
+    changerace: "Zmena rasy"
+chartrade:
+    title: "Výmena postáv"
+    description: "Výmena postáv ti ponúka vymienať svoje postavy s ostatnými hráčmi. Vyber si svoju postavu zo zoznamu a zadaj meno postavy za ktorú chceš vymeniť."
+    your_character: "Tvoja postava"
+    trade_with: "Vymeniť za"
+    made_offer_description: "Tvoja ponuka na výmenu je pripravená"
+    crossrealm_trade: "Chystáš sa o <strong>cross-realm</strong> výmenu. Realm tvojej postavy sa nezhoduje s realmom postavy, za ktorú sa chystáš vymeniť!"
+    view_offers: "Zobraziť ponuky"
+    make_offer: "Vytvoriť ponuku"
+    preview_offer: "Náhľad ponuky"
+    accept: "Prijať ponuku"
+    cancel: "Zrušiť ponuku"
+    status: "Stav"
+my_account:
+    title: "Môj účet"
+    details: "Informácie o účte"
+    account: "Účet"
+    email: "E-mail"
+    last_login: "Posledné prihlásenie"
+    last_logged_ip: "Posledná prihlásená IP"
+    not_yet_logged: "Ešte nebol prihlásený"
+    current_ip: "Súčasná IP"
+    role: "Rola"
+    account_notbanned: "Účet nie je zabanovaný."
+    account_banned: "Účet je zabanovaný."
+    ip_notbanned: "IP adresa nie je zabanovaná."
+    ip_banned: "IP adresa je zabanovaná."
+    banreason: "Dôvod"
+    bannedby: "Banoval"
+    banexpires: "Expiruje"
+    ban_permanent: "Navždy"
+    ban_expires_never: "Nikdy"
+    locked: "Uzamknutý"
+    unlocked: "Odomknutý"
+    passchange:
+        title: "Zmeniť heslo"
+        description: "Zmena tvojho hesla je takmer hotová. Nižšie zadaj a potvrď tvoje nové heslo."
+    vip_status: "VIP status"
+    active_vip: "Si aktívny VIP člen"
+    not_vip: "Nie si VIP členom"
+page_settings:
+    title: "Nastavenia stránky"
+manage_users:
+    title: "Spravovať používateľov"
+    delete_user: "Odstrániť všetky špeciálne roly pre daného používateľa."
+    delete_higher_role: "Tento používateľ ma rovnakú alebo vyššiu rolu ako ty."
+    no_users: "Žiadni privilegovaní používatelia neboli nájdení."
+    id: "ID"
+    username: "Použív. meno"
+    role: "Rola"
+    level: "Úroveň"
+    action: "Akcia"
+    plvl: "Plvl"
+    its_you: "To si ty"
+    add:
+        title: "Pridať rolu novému používateľovi"
+    edit:
+        title: "Zmeniť rolu používateľovi"
+logs:
+    account: "Účet"
+    ip: "IP"
+    time: "Čas"
+    type: "Typ"
+    types:
+        1: "Prihlásenie"
+        2: "Odhlásenie"
+        3: "Neúspešný pokus o prihlásenie"
+        4: "Registrácia"
+        5: "Žiadosť o stratené heslo"
+        6: "Zmenené heslo (stratené heslo)"
+        7: "Žiadosť o zmenu hesla"
+        8: "Zmenené heslo (prihlásený používateľ)"
+        9: "Uzamknutie účtu"
+        10: "Odomknutie účtu"
+        11: "Premenovanie postavy"
+        12: "Úprava postavy"
+        13: "Zmena rasy na postave"
+        14: "Migrácia postavy"
+        15: "Vytvorená ponuka na výmenu"
+        16: "Overená ponuka na výmenu zadávateľom"
+        17: "Overená ponuka na výmenu prijímateľom"
+        18: "Prijatá ponuka na výmenu"
+        19: "Zrušená ponuka na výmenu"
+        20: "Hlasoval na stránke"
+        21: "Nákup Deffender Coinov (Donate)"
+    comment: "Komentár"
+    view_trade: "Zobraziť ponuku na výmenu"
+    trade_preview: "Náhľad ponuky"
+    trade_status:
+        title: "Stav ponuky"
+        active: "Aktívna"
+        accepted: "Prijatá"
+        cancelled: "Zrušená"
+    dont_abuse: "Nezneužívaj svoje oprávnenia."
+my_logs:
+    title: "Moje záznamy"
+    filter: "Filtrovať záznamy..."
+player_logs:
+    title: "Záznamy hráčov"
+    search: "Hľadať v záznamoch..."
+    for_account: "Pre účet"
+    chartrade:
+        offerer: "Zadávateľ"
+        requested: "Príjemca"
+chartrade_logs:
+    title: "Záznamy na výmenu postáv"
+    search: "Hľadať v záznamoch..."
+charinfo:
+    title: "Informácie o postave"
+    class_and_race: "Class & rasa"
+    account: "Účet"
+    last_logout: "Posledné odhlásenie"
+    kills: "Zabití"
+    honors: "Honory"
+    arena_points: "Arena Pointy"
+    played: "Odohrané"
+    status: "Status"
+    lookup_character: "Vyhľadať postavu"
+service_settings:
+    title: "Nastavenia služieb"
+accinfo:
+    title: "Informácie o účte"
+    lookup_account: "Vyhľadať účet"
+    name: "Meno"
+    created_date: "Dátum vytvorenia"
+    lock_status: "Status uzamknutia"
+    status: "Status"
+    state: "Stav"
+    not_banned: "Nezabanovaný"
+    banned: "Zabanovaný"
+    mute: "Mute"
+    not_muted: "Nemá mute"
+    muted: "Má mute"
+    activation: "Aktívacia"
+    activated: "Aktivovaný"
+    not_activated: "Neaktivovaný"
+    deactivate: "Deaktivovať"
+    mute_length: "Dĺžka"
+    mute_reason: "Dôvod"
+    mute_by: "Mute od"
+    characters: "Postavy"
+    no_characters: "Žiadne postavy neboli nájdené."
+    ban_history: "História banov"
+    view_bans: "Ukázať históriu banov"
+    ban_time: "Banované v"
+    ban_length: "Dĺžka"
+    no_bans: "Žiadne bany neboli nájdené."
+    no_accounts: "Žiadne účty neboli nájdené pre dané kritéria vyhľadávania."
+    stats:
+        banned_users: "Zabanované účty"
+        muted_users: "Muted účty"
+        total: "Spolu záznamov"
+        description: "Klikni na použív. meno v prípade, ak chceš vidieť kompletné informácie o danom účte. Kliknutím na e-mail/IP adresu sa ti zobrazí zoznam účtov pre dané kritérium vyhľadávania."
+    search:
+        title: "Zoznam výsledkov vyhľadávania"
+    view_donates: "Ukázať donate históriu"
+    donate_history: "Donate história"
+    donate_time: "Dátum a čas"
+    donate_paid: "Zaplatené"
+    vip_status: "VIP status"
+    active_vip: "Aktívny VIP člen"
+    not_vip: "Nie je VIP členon"
+module_settings:
+    title: "Nastavenia modulov"
+vote:
+    title: "Hlasuj za server"
+    my_points: "{0} Momentálne nemáš <strong>žiadne</strong> Vote Pointy.|{1} Práve máš <strong>1</strong> Vote Point.|]1,4] Práve máš <strong>%count%</strong> Vote Pointy.|]4, Inf[ Práve máš <strong>%count%</strong> Vote Pointov."
+    description: """
+    <strong>Ako hlasovať:</strong>
+                              <ol>
+                                  <li>Vyber si stránku, na ktorej chceš hlasovať a klikni na tlačítko <code>Hlasuj</code>.</li>
+                                  <li>Hlasovacia stránka sa ti otvorí v novom okne.</li>
+                                  <li>Hlasuj za náš server.</li>
+                                  <li>
+                                      Vráť sa späť do UCP a klikni na tlačítko <code>Pripočítaj mi Vote Pointy</code>.
+                                      <ul>
+                                          <li>Ak potrebuješ otvoriť hlasovaciu stránku znova, klikni na tlačítko <code>Otvoriť stránku</code>.</li>
+                                      </ul>
+                                  </li>
+                                  <li>Ak si postupoval správne, Vote Pointy ti budú pripočítané k účtu a zobrazí sa ti správa o úspechu.</li>
+                              </ol>
+                 """
+    site_name: "Názov stránky"
+    points: "Pointy"
+    action: "Akcia"
+    add_votepoints: "Pripočítaj mi Vote Pointy"
+    open_site: "Otvoriť stránku"
+    next_vote: "Ďalšie hlasovanie dostupné za"
+    make_vote: "Hlasuj"
+vote_sites:
+    title: "Správa hlasovacích stránok"
+    site_name: "Názov stránky"
+    image: "Obrázok"
+    url: "URL na hlasovanie"
+    points: "Pointy"
+    cooldown: "Doba k ďalšiemu hlasovaniu"
+    action: "Akcia"
+    no_image: "Žiaden obrázok"
+    no_sites: "Žiadne hlasovacie stránky neboli nájdené."
+    edit_site: "Upraviť"
+    delete_site: "Odstrániť"
+    add:
+        title: "Pridať novú stránku"
+    edit:
+        title: "Upraviť stránku"
+donate:
+    title: "Donate"
+    my_points: "{0} Momentálne nemáš <strong>žiadne</strong> Deffender Coiny.|{1} Práve máš <strong>1</strong> Deffender Coin.|]1,4] Práve máš <strong>%count%</strong> Deffender Coiny.|]4, Inf[ Práve máš <strong>%count%</strong> Deffender Coinov."
+    buy_paypal: "Kúpiť cez PayPal"
+    selected_item: "Vybral si si položku"
+    vip_membership_item: "Premium VIP členstvo"
+    vip_membership_slogan: "...raz premium, navždy premium..."
+    vip_membership_features: """
+    <ul>
+        <li>sprístupnený <strong>Deffender teleporter</strong>,</li>
+        <li>sprístupnený transport po celom svete (príkaz <strong>.flightpath</strong>),</li>
+        <li>darček za VIP členstvo (<strong>Companion pet</strong>, <strong>Mount</strong>, <strong>Tabard of the Defender</strong>, <strong>5x transmog tokens</strong>),</li>
+        <li>vylúčenie z vyčistenia databázy neaktívnych účtov.</li>
+    </ul>
+    """
+    vip_member: "Si <strong>aktívny</strong> VIP člen."
+    not_vip: "<strong>Nie si</strong> VIP členom."
+    donate_guide: """
+                <h4>Donation Guide</h4>
+                <p>Vážení hráči, ak ste s našimi službami spokojní a chceli by ste nám finančne pomôcť,
+                    využite možnosť dobrovoľného príspevku na prevádzku servera, ktorý stojí ročne nemalé peniaze.
+                    Dobrovoľnými príspevkami máte možnosť získať našu virtuálnu menu <strong>Deffender Coin</strong>,
+                    ktorá vám umožní in-game zakúpiť mnoho skvelých vecí a vylepšiť tým vaše postavy.</p>
+                <p>Dary pomáhajú udržovať, zlepšovať a rozšírovať server a jeho služby. Finančná podpora
+                    servera je dobrovoľná a nevratná a nie je možné za ňu požadovať akúkoľvek náhradu (odmenu),
+                    mimo tých, ktoré náš server ponúka. Zvoľte výšku príspevku tak, aby pre Vás táto čiastka
+                    nezaznamenala existenčné problémy.</p>
+                <p>Všetky dobrovoľné príspevky sú riadne evidované a informácie o vašich osobných dát
+                    nie sú poskytované tretím osobám, výnimku tvorí spáchanie trestného činu. Všetky
+                    finančné prostriedky získané z dobrovoľných príspevkov sú použité na prevádzku a
+                    rozvoj projektu Deffender.eu.</p>
+                <p>Ďakujeme všetkým, ktorí sa rozhodli náš projekt podporiť. Veľmi si vašich príspevkov vážíme.</p>
+                <p>Akékoľvek dotazy týkajúce sa finančného príspevku smerujte hlavnému administrátorovi na e-mail:
+                    <a href="mailto:donate.deffender.eu@gmail.com">donate.deffender.eu@gmail.com</a>.</p>
+                <hr>
+                <h4>Premium VIP členstvo</h4>
+                <p>Taktiež môžete získať <strong>permanentné</strong> prémiové členstvo, za zaslaný dar v hodnote
+                    <strong>10.00 &euro;</strong>, pre sprístupnenie všetkých výhod a funkcií, ktoré prémiové členstvo ponúka.</p>
+                <hr>
+                <h4>Spôsoby darovania</h4>
+                <p>V súčasnej dobe podporujeme len dary prostredníctvom služby PayPal.
+                    Akékoľvek dotazy týkajúce sa spôsobov platieb smerujte hlavnému administrátorovi na e-mail:
+                    <a href="mailto:donate.deffender.eu@gmail.com">donate.deffender.eu@gmail.com</a>.</p>
+                <p>Odoslané dary bez údajov (vyplnené poznámky alebo správy pre príjemcu) sú brané ako finančná anonymná
+                    podpora servera, ktorá je dobrovoľná a nevratná a nejde teda za ňu požadovať akúkoľvek náhradu vrátane
+                    tých, ktoré server za podporu ponúka.</p>
+                <p><strong>Dar prostredníctvom PayPal</strong>:</p>
+                    <ul>
+                        <li>kliknite na položku, ktorá vám bude pridaná ako odmena za darovanie,</li>
+                        <li>zobrazí sa vám vami vybraná položka s tlačítkom <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"
+                            alt="PayPal - The safer, easier way to pay online!">, ktoré po jeho kliknutí vás presmeruje na PayPal stránku s už
+                            predvytvorenými údajmi, takže nemusíte nič vyplňovať, len potvrdiť darovanie.</li>
+                    </ul>
+                <hr>
+                <p><strong>Deffender Coin</strong> je oficiálny názov našej virtuálnej internetovej měny, kterú je možné
+                    získať len prostredníctvom darovania.</p>
+    """
+donate_stats:
+    title: "Donate štatistiky"
+donate_products:
+    title: "Správa donate produktov"
+    price: "Cena"
+    bonus_points: "Bonusové DC"
+    action: "Akcia"
+    edit_product: "Upraviť"
+    delete_product: "Odstrániť"
+    add:
+        title: "Pridať nový produkt"
+    edit:
+        title: "Upraviť produkt"

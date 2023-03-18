@@ -1,0 +1,42 @@
+{block title}{_pages.vote_sites.title}{/block}
+{block header}{_pages.vote_sites.title}{/block}
+{block content}
+    <div class="col-md-12">
+        <div class="text-right">
+            <a n:href="VoteSites:add" class="btn btn-success"><i class="fa fa-plus-circle"></i> {_pages.vote_sites.add.title}</a>
+        </div>
+        {snippet voteSitesList}
+            {if $vote_sites->count() > 0}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>{_pages.vote_sites.site_name}</th>
+                            <th>{_pages.vote_sites.image}</th>
+                            <th>{_pages.vote_sites.url}</th>
+                            <th>{_pages.vote_sites.points}</th>
+                            <th>{_pages.vote_sites.cooldown}</th>
+                            <th>{_pages.vote_sites.action}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr n:foreach="$vote_sites as $site">
+                            <td>{$site->name}</td>
+                            <td>{if $site->image_path}<img src="{$basePath}/assets/images/vote_sites/{$site->image_path}" alt="$site->name" width="{$site->image_width}px" height="{$site->image_height}px" border="0">{else}<i>{_pages.vote_sites.no_image}</i>{/if}</td>
+                            <td>{$site->url}</td>
+                            <td>+{$site->points}</td>
+                            <td>{$site->cooldown}{_pages.global.t_hours_s}</td>
+                            <td>
+                                <a n:href="edit $site->id" class="tooltip-txt btn btn-primary btn-circle" data-placement="top" title="{_pages.vote_sites.edit_site}"><i class="fa fa-edit"></i></a>
+                                <a n:href="delete! $site->id" class="tooltip-txt ajax btn btn-danger btn-circle" data-placement="top" title="{_pages.vote_sites.delete_site}" data-confirm="{_messages.global.confirm_delete}"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            {else}
+                <div class="alert alert-info" role="alert">{_pages.vote_sites.no_sites}</div>
+            {/if}
+        {/snippet}
+    </div>
+{/block}

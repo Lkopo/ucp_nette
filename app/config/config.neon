@@ -1,0 +1,132 @@
+# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# https://nette.org/security-warning
+
+parameters:
+
+
+php:
+	date.timezone: Europe/Prague
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+http:
+	proxy:
+	    - 103.21.244.0/22
+	    - 103.22.200.0/22
+	    - 103.31.4.0/22
+	    - 104.16.0.0/12
+	    - 108.162.192.0/18
+	    - 131.0.72.0/22
+	    - 141.101.64.0/18
+	    - 162.158.0.0/15
+	    - 172.64.0.0/13
+	    - 173.245.48.0/20
+	    - 188.114.96.0/20
+	    - 190.93.240.0/20
+	    - 197.234.240.0/22
+	    - 198.41.128.0/17
+
+session:
+	expiration: 14 days
+	autoStart: true
+
+translation:
+	default: en
+	whitelist: [en, cs, sk]
+	fallback: [en_US, en]
+
+extensions:
+    translation: Kdyby\Translation\DI\TranslationExtension
+    reCaptcha: Minetro\ReCaptcha\DI\ReCaptchaExtension
+    payPal: MetisFW\PayPal\DI\PayPalExtension
+
+reCaptcha:
+    siteKey: 'site_key'
+    secretKey: 'secret_key'
+
+payPal:
+  clientId: clientID
+  secret: clientSECRET
+  currency: EUR
+  sdkConfig:
+    mode: sandbox
+    log.Enabled: true
+    log.FileName: '%tempDir%/PayPal.log'
+    log.LogLevel: DEBUG
+    validation.level: log
+    cache.enabled: true
+
+decorator:
+    App\Forms\BaseFormFactory:
+        setup:
+            - setTranslator
+
+services:
+    - App\Caching\RoleCache
+    - App\Caching\RealmNameCache
+    - App\Caching\PrivilegesCache
+    - App\Caching\SettingsCache
+    - App\Caching\UserNameCache
+    - App\Caching\ServiceSettingsCache
+    - App\Caching\ModuleSettingsCache
+    - App\Forms\SignInFormFactory
+    - App\Forms\RegisterFormFactory
+    - App\Forms\LostPassFormFactory
+    - App\Forms\LostPassConfirmFormFactory
+    - App\Forms\MakeOfferFormFactory
+    - App\Forms\MakeOfferConfirmFormFactory
+    - App\Forms\PageSettingsFormFactory
+    - App\Forms\RoledUserFormFactory
+    - App\Forms\SelectCharacterFormFactory
+    - App\Forms\FilterLogsFormFactory
+    - App\Forms\SearchLogsFormFactory
+    - App\Forms\SearchChartradeLogsFormFactory
+    - App\Forms\CharinfoSearchFormFactory
+    - App\Forms\ServiceSettingsFormFactory
+    - App\Forms\AccinfoSearchFormFactory
+    - App\Forms\AccSearchByEmailFormFactory
+    - App\Forms\AccSearchByIpFormFactory
+    - App\Forms\ModuleSettingsFormFactory
+    - App\Forms\VoteSitesFormFactory
+    - App\Forms\DonateProductFormFactory
+    - App\Latte\ColorizeByClassFilter
+    - App\Latte\RaceIconFilter
+    - App\Latte\ClassIconFilter
+    - App\Latte\RealmNameFilter
+    - App\Latte\ToGoldsFilter
+    - App\Latte\StatusFilter
+    - App\Latte\CensoreEmailFilter
+    - App\Latte\RoleLevelFilter
+    - App\Latte\RoleNameFilter
+    - App\Latte\TimeToTextFilter
+    - App\Latte\UserNameFilter
+    - App\Latte\ToAsciiFilter
+    - App\Model\UserManager(@database.auth.context)
+    - App\Model\CharacterRepository(@database.characters.context)
+    - App\Model\SettingsManager(@database.web.context)
+    - App\Model\ChartradeRepository(@database.web.context)
+    - App\Model\AccountRepository(@database.web.context)
+    - App\Model\LogRepository(@database.web.context)
+    - App\Model\VoteManager(@database.web.context)
+    - App\Model\DonateManager(@database.web.context)
+    router: App\RouterFactory::createRouter
+    authenticator: App\Model\Authenticator(@database.auth.context)
+    authorizator: App\Model\Authorizator(@database.web.context)
+    nette.latteFactory:
+        setup:
+            - addFilter(colorize_by_class, @App\Latte\ColorizeByClassFilter)
+            - addFilter(race_icon, @App\Latte\RaceIconFilter)
+            - addFilter(class_icon, @App\Latte\ClassIconFilter)
+            - addFilter(realm_name, @App\Latte\RealmNameFilter)
+            - addFilter(to_golds, @App\Latte\ToGoldsFilter)
+            - addFilter(status, @App\Latte\StatusFilter)
+            - addFilter(censore_email, @App\Latte\CensoreEmailFilter)
+            - addFilter(role_level, @App\Latte\RoleLevelFilter)
+            - addFilter(role_name, @App\Latte\RoleNameFilter)
+            - addFilter(time_to_text, @App\Latte\TimeToTextFilter)
+            - addFilter(user_name, @App\Latte\UserNameFilter)
+            - addFilter(to_ascii, @App\Latte\ToAsciiFilter)

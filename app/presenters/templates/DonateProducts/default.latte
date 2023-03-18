@@ -1,0 +1,38 @@
+{block title}{_pages.donate_products.title}{/block}
+{block header}{_pages.donate_products.title}{/block}
+{block content}
+    <div class="col-md-12">
+        <div class="text-right">
+            <a n:href="DonateProducts:add" class="btn btn-success"><i class="fa fa-plus-circle"></i> {_pages.donate_products.add.title}</a>
+        </div>
+        {snippet productsList}
+            {if $products->count() > 0}
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>{_pages.donate_products.price}</th>
+                            <th>{_pages.global.donate_points}</th>
+                            <th>{_pages.donate_products.bonus_points}</th>
+                            <th>{_pages.donate_products.action}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr n:foreach="$products as $product">
+                            <td><strong>{$product->price} &euro;</strong></td>
+                            <td>+{$product->coins} DC</td>
+                            <td><strong style="color: green" n:tag-if="$product->bonus_coins > 0">+{$product->bonus_coins} DC</strong></td>
+                            <td>
+                                <a n:href="edit $product->id" class="tooltip-txt btn btn-primary btn-circle" data-placement="top" title="{_pages.donate_products.edit_product}"><i class="fa fa-edit"></i></a>
+                                <a n:href="delete! $product->id" class="tooltip-txt ajax btn btn-danger btn-circle" data-placement="top" title="{_pages.donate_products.delete_product}" data-confirm="{_messages.global.confirm_delete}"><i class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            {else}
+                <div class="alert alert-info" role="alert">{_pages.donate_products.no_products}</div>
+            {/if}
+        {/snippet}
+    </div>
+{/block}

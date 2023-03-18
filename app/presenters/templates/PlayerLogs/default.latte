@@ -1,0 +1,154 @@
+{block title}{_pages.player_logs.title}{/block}
+{block header}{_pages.player_logs.title}{/block}
+{block subheader}{if $searched_user}{_pages.player_logs.for_account}: {$searched_user->username} ({$searched_user->id}){/if}{/block}
+{block content}
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    {_pages.player_logs.search}
+                </h4>
+            </div>
+            <div id="collapseSearch" class="in">
+                <div class="panel-body">
+                    {control searchLogsForm}
+                </div>
+            </div>
+        </div>
+        {if $logs && $logs->count() > 0}
+            {var $trade_ids = array()}
+            {var $character_names = array()}
+            <div class="table-responsive">
+                <table class="table table-custom table-striped text-center">
+                    <thead>
+                    <tr>
+                        <th n:if="!$searched_user">{_pages.logs.account}</th>
+                        <th>{_pages.logs.ip}</th>
+                        <th>{_pages.logs.type}</th>
+                        <th>{_pages.logs.time}</th>
+                        <th>{_pages.logs.comment}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr n:foreach="$logs as $log" n:class="$log->type == $logRepository::TYPE_AUTH_LOGIN_FAILED ? status_offline">
+                        <td n:if="!$searched_user"><strong><a n:href="Accinfo: acc => $log->account_id" target="_blank">{$log->account_id|user_name} ({$log->account_id})</a></strong></td>
+                        <td>{$log->ip}</td>
+                        <td>{_pages.logs.types.$log->type}</td>
+                        <td>{$log->time|date:'j.n.Y <b>H:i:s</b>'|noescape}</td>
+                        <td>
+                            {if $log->type >= $logRepository::TYPE_TRADE_OFFER_CREATED && $log->type <= $logRepository::TYPE_TRADE_OFFER_CANCELLED}
+                                {var $trade_ids[] = $log->comment}
+                                <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-trade-{$log->comment}">{_pages.logs.view_trade}</button>
+                            {elseif $log->type >= $logRepository::TYPE_CHAR_RENAME && $log->type <= $logRepository::TYPE_CHAR_CHANGEFACTION}
+                                {if $log->type == $logRepository::TYPE_CHAR_RENAME}
+                                    {var $char_guid = explode('-', $log->comment)[0]}
+                                    {var $char_prev_name = explode('-', $log->comment)[1]}
+                                {else}
+                                    {var $char_guid = $log->comment}
+                                {/if}
+                                {if !isset($character_names[$char_guid])}
+                                    {var $character_names[$char_guid] = $characterRepository->findOneById($char_guid)->name}
+                                {/if}
+                                <strong>{ifset $char_prev_name}{$char_prev_name} <i class="fa fa-long-arrow-right fa-fw"></i> {/ifset}<a n:href="Charinfo: char => $char_guid" target="_blank">{$character_names[$char_guid]}</a></strong>
+                            {elseif $log->type == $logRepository::TYPE_VOTE_VOTED}
+                                {var $site = $voteManager->findOneSiteById($log->comment)}
+                                {if $site}
+                                    {$site->name}
+                                {/if}
+                            {elseif $log->type == $logRepository::TYPE_DONATE_DONATED}
+                                {var $price = explode('-', $log->comment)[0]}
+                                {var $points = explode('-', $log->comment)[1]}
+                                <strong>{$price} &euro;</strong> (+{$points} DC)
+                            {/if}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center">
+                <div class="btn-group" role="group" aria-label="{_pages.paginator.name}">
+                    <div class="btn btn-default disabled" role="group" n:tag-if="$paginator->isFirst()"><a class="btn btn-default tooltip-txt" role="group" n:href="this, page => $paginator->getPage() - 1" n:tag-if="!$paginator->isFirst()" data-placement="top" title="{_pages.paginator.previous}"><i class="fa fa-angle-double-left"></i></a></div>
+                    {for $scatter = 5,
+                     $i = ($paginator->getPage() - (($paginator->getPage() <= $scatter) ?
+                                                                $paginator->getPage()-1 : $scatter)),
+                     $x = $paginator->getPage() + ((($paginator->getPage() + $scatter) < $paginator->getLastPage()) ?
+                                                                $scatter : ($paginator->getLastPage()-$paginator->getPage()));
+                     $i <= $x;
+                     $i++}
+                    <div class="btn btn-default disabled" role="group" n:tag-if="$i == $paginator->getPage()">
+                        <a class="btn btn-default" role="group" n:href="this, page => $i" n:tag-if="$i !== $paginator->getPage()">{$i}</a></div>{/for}
+                    <div class="btn btn-default disabled" role="group" n:tag-if="$paginator->isLast()"><a class="btn btn-default tooltip-txt" role="group" n:href="this, page => $paginator->getPage() + 1" n:tag-if="!$paginator->isLast()" data-placement="top" title="{_pages.paginator.next}"><i class="fa fa-angle-double-right"></i></a></div>
+                </div>
+            </div>
+
+            {var $trade_status = array(
+                            $chartradeRepository::STATUS_ACTIVE => array(
+                                txt => 'pages.logs.trade_status.active',
+                                color => 'purple'
+                            ),
+                            $chartradeRepository::STATUS_ACCEPTED => array(
+                                txt => 'pages.logs.trade_status.accepted',
+                                color => 'green'
+                            ),
+                            $chartradeRepository::STATUS_CANCELLED => array(
+                                txt => 'pages.logs.trade_status.cancelled',
+                                color => 'red'
+                            )
+                         )}
+
+            <!-- Modal -->
+            <div n:foreach="array_unique($trade_ids) as $trade_id" class="modal fade" id="modal-trade-{$trade_id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">{_pages.logs.trade_preview}</h4>
+                        </div>
+                        <div class="modal-body">
+                            {var $trade = $chartradeRepository->findOneById($trade_id)}
+                            <div class="alert alert-info">{_pages.logs.trade_status.title}: <strong style="color: {$trade_status[$trade->status]['color']}">{_$trade_status[$trade->status]['txt']|upper}</strong></div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="6">{_pages.player_logs.chartrade.offerer}:</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><a n:href="Charinfo: char => $trade->offerer_guid" target="_blank">{$trade->offerer_name|noescape|colorize_by_class:$trade->offerer_class}</a></td>
+                                        <td n:class="$trade->offerer_realm != $trade->requested_realm ? cross-realm_txt">{$trade->offerer_realm|realm_name}</td>
+                                        <td>{$trade->offerer_race|noescape|race_icon:$trade->offerer_gender}</td>
+                                        <td>{$trade->offerer_class|noescape|class_icon}</td>
+                                        <td>{$trade->offerer_level}</td>
+                                        <td><span class="golds">{$trade->offerer_money|to_golds|number:0:'':','}</span></td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="6">{_pages.player_logs.chartrade.requested}:</th>
+                                    </tr>
+                                    <tr>
+                                        <td><a n:href="Charinfo: char => $trade->requested_guid" target="_blank">{$trade->requested_name|noescape|colorize_by_class:$trade->requested_class}</a></td>
+                                        <td n:class="$trade->offerer_realm != $trade->requested_realm ? cross-realm_txt">{$trade->requested_realm|realm_name}</td>
+                                        <td>{$trade->requested_race|noescape|race_icon:$trade->requested_gender}</td>
+                                        <td>{$trade->requested_class|noescape|class_icon}</td>
+                                        <td>{$trade->requested_level}</td>
+                                        <td><span class="golds">{$trade->requested_money|to_golds|number:0:'':','}</span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">{_pages.global.close}</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+        {else}
+            <div class="alert alert-info" role="alert">{_messages.global.no_records}</div>
+        {/if}
+    </div>
+{/block}
